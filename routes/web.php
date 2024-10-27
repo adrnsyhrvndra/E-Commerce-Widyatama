@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [UsersController::class, 'index']);
+Route::get('/users/create', [UsersController::class, 'create']); // Menampilkan form tambah data
+Route::post('/users/store', [UsersController::class, 'store']);   
+Route::get('/users/edit/{id}', [UsersController::class, 'edit']);
+Route::put('/users/update/{id}', [UsersController::class, 'update']);
+Route::delete('/users/destroy/{id}', [UsersController::class, 'destroy']);
