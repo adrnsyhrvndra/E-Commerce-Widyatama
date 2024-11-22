@@ -22,9 +22,9 @@ class Product extends Migration
             $table->text('description');
             $table->integer('price'); 
             $table->integer('stock');
+            $table->string('product_image', 255)->nullable();
             $table->timestamps();
-
-            // Defining the foreign key constraints
+            
             $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
             $table->foreign('brand_id')->references('brand_id')->on('brands')->onDelete('cascade');
         });

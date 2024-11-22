@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +14,9 @@ use App\Http\Controllers\UsersController;
 |
 */
 
-Route::get('/', [UsersController::class, 'index']);
-Route::get('/users/create', [UsersController::class, 'create']); // Menampilkan form tambah data
-Route::post('/users/store', [UsersController::class, 'store']);   
-Route::get('/users/edit/{id}', [UsersController::class, 'edit']);
-Route::put('/users/update/{id}', [UsersController::class, 'update']);
-Route::delete('/users/destroy/{id}', [UsersController::class, 'destroy']);
+Route::get('/brand', [BrandController::class, 'index']);
+Route::get('/brand/create', [BrandController::class, 'create']);
+Route::post('/brand/store', [BrandController::class, 'store']);
+Route::get('/brand/edit/{brand_id}', [BrandController::class, 'edit']);
+Route::put('/brand/update/{brand_id}', [BrandController::class, 'update']);
+Route::delete('/brand/destroy/{brand_id}', [BrandController::class, 'destroy']);

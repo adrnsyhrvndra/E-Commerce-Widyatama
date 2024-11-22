@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('full_name', 100);
             $table->string('phone_number', 20);
             $table->enum('role', ['customer', 'admin']);
+            $table->string('profile_picture', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Brand extends Migration
+class CreateBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,7 @@ class Brand extends Migration
     public function up()
     {
         Schema::create('brands', function (Blueprint $table) {
-            $table->id('brand_id', 11);
-            $table->string('brand_name', 50);
-            $table->string('brand_logo', 255)->nullable();
+            $table->id();
             $table->timestamps();
         });
     }
