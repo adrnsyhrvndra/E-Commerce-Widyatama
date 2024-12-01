@@ -26,6 +26,8 @@ class BrandController extends Controller{
         $brand = new Brand;
         $brand->brand_name = $request->brand_name;
         $brand->brand_logo = $request->brand_logo;
+        $brand->created_at = now();
+        $brand->updated_at = now();
 
         if ($request->hasFile('brand_logo')) {
             $image = $request->file('brand_logo');
@@ -34,7 +36,7 @@ class BrandController extends Controller{
             $brand->brand_logo = $imageName;
         }
 
-      $brand->save();
+        $brand->save();
 
       return redirect('/brand/create')->with('success', 'Data brand berhasil ditambahkan');
 
@@ -56,6 +58,7 @@ class BrandController extends Controller{
 
         $brand->brand_name = $request->brand_name;
         $brand->brand_logo = $request->brand_logo;
+        $brand->updated_at = now();
 
         if ($request->hasFile('brand_logo')) {
             if ($brand->brand_logo) {
@@ -72,6 +75,7 @@ class BrandController extends Controller{
 
         return redirect('/brand');
     }
+    
     public function destroy($brand_id){
         Brand::where('brand_id', $brand_id)->delete();
         return redirect('/brand');
