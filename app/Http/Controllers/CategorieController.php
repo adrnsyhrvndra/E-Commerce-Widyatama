@@ -52,7 +52,7 @@ class CategorieController extends Controller{
         $categorie->save();
 
         return redirect('/categorie');
-    }
+    }   
 
     public function destroy($category_id){
         Categorie::where('category_id', $category_id)->delete();
