@@ -18,14 +18,12 @@ class Addresses extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('address_label', 50);
             $table->string('receipt_name', 100);
-            $table->string('phone_number', 20);
             $table->string('province', 100);
             $table->string('city_or_regency', 100);
             $table->string('district', 100);
             $table->string('postal_code', 20);
             $table->text('full_address');
             $table->text('address_note');
-            $table->tinyInteger('is_main');
             $table->timestamps();
 
             // Defining the foreign key constraints
