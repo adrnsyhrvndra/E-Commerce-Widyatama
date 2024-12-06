@@ -48,74 +48,110 @@
         <div class="row">
             <div class="col-12">
                 <h4 class="mb-5">Manage Addreses - {{ Auth::user()->full_name }}</h4>
-                <form class="d-flex flex-column gap-4" action="/addresses/store" method="POST" enctype="multipart/form-data">
+                <form 
+                    class="d-flex flex-column gap-4" 
+                    action="{{ isset($address) ? '/addresses/update/' . $address->address_id : '/addresses/store' }}"
+                    method="POST" 
+                    enctype="multipart/form-data"
+                >
                     @csrf
+                    @if(isset($address))
+                        @method('PUT')
+                    @endif
                     <input type="hidden" name="user_id" value="{{ Auth::user()->user_id }}">
                     <div class="form-group">
                         <label for="address_label">Address Label</label>
-                        <input type="text" name="address_label" class="form-control" id="address_label" />
+                        <input 
+                            type="text" 
+                            name="address_label" 
+                            class="form-control" 
+                            id="address_label" 
+                            value="{{ old('address_label', $address->address_label ?? '') }}" 
+                        />
                     </div>
                     <div class="form-group">
                         <label for="receipt_name">Receipt Name</label>
-                        <input type="text" name="receipt_name" class="form-control" id="receipt_name" />
+                        <input 
+                            type="text" 
+                            name="receipt_name" 
+                            class="form-control" 
+                            id="receipt_name"
+                            value="{{ old('receipt_name', $address->receipt_name ?? '') }}" 
+                        />
                     </div>
                     <div class="form-group">
                         <label for="province">Province</label>
                         <select name="province" id="province" class="form-control">
-                            <option value="Aceh">Aceh</option>
-                            <option value="Bali">Bali</option>
-                            <option value="Banten">Banten</option>
-                            <option value="Bengkulu">Bengkulu</option>
-                            <option value="Gorontalo">Gorontalo</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Jambi">Jambi</option>
-                            <option value="Jawa Barat">Jawa Barat</option>
-                            <option value="Jawa Tengah">Jawa Tengah</option>
-                            <option value="Jawa Timur">Jawa Timur</option>
-                            <option value="Kalimantan Barat">Kalimantan Barat</option>
-                            <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                            <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                            <option value="Kalimantan Timur">Kalimantan Timur</option>
-                            <option value="Kalimantan Utara">Kalimantan Utara</option>
-                            <option value="Kepulauan Riau">Kepulauan Riau</option>
-                            <option value="Lampung">Lampung</option>
-                            <option value="Maluku">Maluku</option>
-                            <option value="Maluku Utara">Maluku Utara</option>
-                            <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
-                            <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
-                            <option value="Papua">Papua</option>
-                            <option value="Papua Barat">Papua Barat</option>
-                            <option value="Riau">Riau</option>
-                            <option value="Sulawesi Barat">Sulawesi Barat</option>
-                            <option value="Sulawesi Selatan">Sulawesi Selatan</option>
-                            <option value="Sulawesi Tengah">Sulawesi Tengah</option>
-                            <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
-                            <option value="Sulawesi Utara">Sulawesi Utara</option>
-                            <option value="Sumatera Barat">Sumatera Barat</option>
-                            <option value="Sumatera Selatan">Sumatera Selatan</option>
-                            <option value="Sumatera Utara">Sumatera Utara</option>
-                            <option value="Yogyakarta">Yogyakarta</option>
+                            <option value="" disabled selected>Pilih Provinsi</option>
+                            <option value="Aceh" {{ (isset($address) && $address->province == 'Aceh') ? 'selected' : '' }}>
+                                Aceh
+                            </option>
+                            <option value="Bali" {{ (isset($address) && $address->province == 'Bali') ? 'selected' : '' }}>
+                                Bali
+                            </option>
+                            <option value="Banten" {{ (isset($address) && $address->province == 'Banten') ? 'selected' : '' }}>
+                                Banten
+                            </option>
+                            <option value="Bengkulu" {{ (isset($address) && $address->province == 'Bengkulu') ? 'selected' : '' }}>
+                                Bengkulu
+                            </option>
+                            <option value="Gorontalo" {{ (isset($address) && $address->province == 'Gorontalo') ? 'selected' : '' }}>
+                                Gorontalo
+                            </option>
+                            <option value="Jakarta" {{ (isset($address) && $address->province == 'Jakarta') ? 'selected' : '' }}>
+                                Jakarta
+                            </option>
+                            <option value="Jambi" {{ (isset($address) && $address->province == 'Jambi') ? 'selected' : '' }}>
+                                Jambi
+                            </option>
+                            <option value="Jawa Barat" {{ (isset($address) && $address->province == 'Jawa Barat') ? 'selected' : '' }}>
+                                Jawa Barat
+                            </option>
+                            <option value="Jawa Tengah" {{ (isset($address) && $address->province == 'Jawa Tengah') ? 'selected' : '' }}>
+                                Jawa Tengah
+                            </option>
+                            <option value="Jawa Timur" {{ (isset($address) && $address->province == 'Jawa Timur') ? 'selected' : '' }}>
+                                Jawa Timur
+                            </option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="city_or_regency">City or Regency</label>
-                        <input type="text" name="city_or_regency" class="form-control" id="city_or_regency" />
+                        <input 
+                            type="text" 
+                            name="city_or_regency" 
+                            class="form-control" 
+                            id="city_or_regency"
+                            value="{{ old('city_or_regency', $address->city_or_regency ?? '') }}"
+                        />
                     </div>
                     <div class="form-group">
                         <label for="district">District</label>
-                        <input type="text" name="district" class="form-control" id="district" />
+                        <input 
+                            type="text" 
+                            name="district" 
+                            class="form-control" 
+                            id="district"
+                            value="{{ old('district', $address->district ?? '') }}"
+                        />
                     </div>
                     <div class="form-group">
                         <label for="postal_code">Postal Code</label>
-                        <input type="text" name="postal_code" class="form-control" id="postal_code" />
+                        <input 
+                            type="text" 
+                            name="postal_code" 
+                            class="form-control" 
+                            id="postal_code" 
+                            value="{{ old('postal_code', $address->postal_code ?? '') }}"
+                        />
                     </div>
                     <div class="form-group">
                         <label for="full_address">Full Address</label>
-                        <textarea name="full_address" cols="30" rows="5" class="form-control" id="full_address"></textarea>
+                        <textarea name="full_address" cols="30" rows="5" class="form-control" id="full_address">{{ old('full_address', $address->full_address ?? '') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="address_note">Address Note</label>
-                        <textarea name="address_note" cols="30" rows="5" class="form-control" id="address_note"></textarea>
+                        <textarea name="address_note" cols="30" rows="5" class="form-control" id="address_note">{{ old('address_note', $address->address_note ?? '') }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                 </form>

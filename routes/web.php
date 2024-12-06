@@ -60,3 +60,4 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', [AuthController::class, 'showStorePage'])->middleware('auth');
 Route::get('/addresses', [StoreController::class, 'showAddresesPage'])->middleware('auth');
 Route::post('/addresses/store', [StoreController::class, 'addAddress'])->middleware('auth');
+Route::put('/addresses/update/{address_id}', [StoreController::class, 'updateAddress'])->middleware('auth');
