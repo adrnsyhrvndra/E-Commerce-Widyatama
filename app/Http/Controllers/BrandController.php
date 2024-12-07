@@ -38,7 +38,7 @@ class BrandController extends Controller{
 
         $brand->save();
 
-        return redirect('/brand/create')->with('success', 'Data brand berhasil ditambahkan');
+        return redirect('/brand')->with('success', 'Data brand berhasil ditambahkan');
 
     }
 
