@@ -30,7 +30,7 @@ class CategorieController extends Controller{
 
         $categorie->save();
 
-        return redirect('/categorie/create')->with('success', 'Data categorie berhasil ditambahkan');
+        return redirect('/categorie')->with('success', 'Data categorie berhasil ditambahkan');
 
     }
 

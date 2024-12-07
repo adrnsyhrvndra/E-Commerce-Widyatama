@@ -49,17 +49,16 @@
             @foreach ($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="{{ asset('storage/gambarStorage/' . $product->product_image) }}" alt="Product Image"
-                            class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <img src="data:image/jpeg;base64,{{ base64_encode($product->product_image) }}" alt="Product Image" class="card-img-top" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->product_name }}</h5>
                             <div class="d-flex flex-row justify-content-start align-items-center gap-1">
-                                  <img src="{{ asset('storage/gambarStorage/' . $product->brands->brand_logo) }}" class="rounded-circle" width="15" alt="">
+                                  <img src="data:image/jpeg;base64,{{ base64_encode($product->brands->brand_logo) }}" class="rounded-circle" width="15" alt="">
                                   <h6 class="card-subtitle text-muted">{{ $product->brands->brand_name }}</h6>
                             </div>
                             <h6 class="card-subtitle mt-2 text-muted">{{ $product->categories->category_name }}</h6>
                             <p class="card-text">{{ Str::limit($product->description, 80) }}</p>
-                            <p class="card-text text-success">Price: ${{ number_format($product->price, 2) }}</p>
+                            <p class="card-text text-success">Price: Rp{{ number_format($product->price, 2) }}</p>
                             <p class="card-text text-primary">Stock: {{ $product->stock }}</p>
                             <a href="#" class="btn btn-primary">Buy Product</a>
                         </div>

@@ -14,6 +14,7 @@ class ProductController extends Controller {
         $product = Product::with(['brands', 'categories'])->get();
         return view('products/index', compact('product'));
     }
+
     public function create(){
         $brands = Brand::all();
         $categories = Categorie::all();
@@ -21,7 +22,6 @@ class ProductController extends Controller {
     }
 
     public function store(Request $request){
-
         $request->validate([
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -29,9 +29,9 @@ class ProductController extends Controller {
             'description' => 'required',
             'price' => 'required',
             'stock' => 'required',
-            'product_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
-        
+
         $product = new Product;
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
@@ -39,17 +39,15 @@ class ProductController extends Controller {
         $product->description = $request->description;
         $product->price = $request->price;
         $product->stock = $request->stock;
-        $product->product_image = $request->product_image;
 
         if ($request->hasFile('product_image')) {
             $image = $request->file('product_image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/gambarStorage', $imageName);
-            $product->product_image = $imageName;
+            $imageData = file_get_contents($image->getRealPath());
+            $product->product_image = $imageData;
         }
 
         $product->save();
-        
+
         return redirect('/product')->with('success', 'Product berhasil ditambahkan!');
     }
 
@@ -61,7 +59,6 @@ class ProductController extends Controller {
     }
 
     public function update(Request $request, $product_id){
-
         $request->validate([
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -79,18 +76,16 @@ class ProductController extends Controller {
         $product->description = $request->description;
         $product->price = $request->price;
         $product->stock = $request->stock;
-        $product->product_image = $request->product_image;
         $product->updated_at = now();
 
         if ($request->hasFile('product_image')) {
             if ($product->product_image) {
-                Storage::delete('public/gambarStorage/' . $product->product_image);
+                $product->product_image = null;
             }
 
             $image = $request->file('product_image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/gambarStorage', $imageName);
-            $product->product_image = $imageName;
+            $imageData = file_get_contents($image->getRealPath());
+            $product->product_image = $imageData;
         }
 
         $product->save();

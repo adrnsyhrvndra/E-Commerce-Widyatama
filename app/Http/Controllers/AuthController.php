@@ -54,29 +54,29 @@ class AuthController extends Controller {
             'email' => 'required|email|unique:users',
             'full_name' => 'required',
             'phone_number' => 'required',
-            'profile_picture' => 'nullable',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048', 
             'password_confirmation' => 'required|same:password',
         ]);
-
-        $user = User::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'email' => $request->email,
-            'full_name' => $request->full_name,
-            'phone_number' => $request->phone_number,
-            'role' => 'customer',
-            'profile_picture' => $request->profile_picture,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
+    
+        $user = new User();
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
+        $user->email = $request->email;
+        $user->full_name = $request->full_name;
+        $user->phone_number = $request->phone_number;
+        $user->role = 'customer';
+        $user->created_at = now();
+        $user->updated_at = now();
+    
         if ($request->hasFile('profile_picture')) {
-            $user->profile_picture = $request->file('profile_picture')->store('public/profile_picture');
-            $user->save();
+            $file = $request->file('profile_picture');
+            $user->profile_picture = file_get_contents($file->getRealPath());
         }
-
+    
+        $user->save();
+    
         Auth::login($user);
-
+    
         return redirect('/login')->with('success', 'Registrasi berhasil!');
     }
 

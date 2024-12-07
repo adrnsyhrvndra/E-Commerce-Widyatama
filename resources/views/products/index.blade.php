@@ -21,6 +21,13 @@
         body {
             font-family: 'Rethink Sans', sans-serif;
         }
+        .product-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
     </style>
 </head>
 
@@ -29,9 +36,9 @@
     <!-- Content Section -->
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Data Product</h4>
+            <h4>Kelola Produk</h4>
             <div>
-                <a href="/product/create" class="btn btn-primary">Tambah Product</a>
+                <a href="/product/create" class="btn btn-primary">Tambah Produk</a>
                 <a href="/admin" class="btn btn-danger">Kembali Ke Beranda</a>
             </div>
         </div>
@@ -41,14 +48,14 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Category Name</th>
-                            <th>Brand Name</th>
-                            <th>Product Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Product Image</th>
-                            <th>Actions</th>
+                            <th>Kategori</th>
+                            <th>Brand</th>
+                            <th>Nama Produk</th>
+                            <th>Deskripsi</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Gambar Produk</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,8 +69,7 @@
                                 <td>{{ $item->price }}</td>
                                 <td>{{ $item->stock }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/gambarStorage/' . $item->product_image) }}" alt="Product Image" class="img-thumbnail"
-                                        width="100">
+                                    <img src="data:image/jpeg;base64,{{ base64_encode($item->product_image) }}" alt="Brand Logo" class="product-img">
                                 </td>
                                 <td>
                                     <a href="/product/edit/{{ $item->product_id }}"

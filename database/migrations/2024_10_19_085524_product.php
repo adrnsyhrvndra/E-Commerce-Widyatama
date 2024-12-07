@@ -22,7 +22,7 @@ class Product extends Migration
             $table->text('description');
             $table->integer('price'); 
             $table->integer('stock');
-            $table->string('product_image', 255)->nullable();
+            $table->binary('product_image')->nullable();
             $table->timestamps();
             
             $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');

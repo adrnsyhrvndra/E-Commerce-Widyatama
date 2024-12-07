@@ -16,7 +16,7 @@ class Brand extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id('brand_id', 11);
             $table->string('brand_name', 50);
-            $table->string('brand_logo', 255)->nullable();
+            $table->binary('brand_logo')->nullable();
             $table->timestamps();
         });
     }

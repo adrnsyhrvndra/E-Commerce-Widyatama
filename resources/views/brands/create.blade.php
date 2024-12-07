@@ -1,52 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-      <!-- Custom Local Font -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-      <style>
-            body {
-                  font-family: 'Rethink Sans', sans-serif;
-            }
-      </style>
-      <title>Form Tambah Brands</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-      <script src="{{ asset('assets/jquery.js') }}"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Form Tambah Brands</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <!-- Custom Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Rethink Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 5%;
+        }
+
+        .form-section {
+            margin-top: 5%;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn {
+            padding: 10px 20px;
+        }
+
+        .form-control {
+            border-radius: 0.375rem;
+        }
+
+        .form-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .form-section .form-group label {
+            font-weight: bold;
+        }
+
+        .form-section .col-8 {
+            max-width: 700px;
+        }
+
+        /* Custom file input style */
+        .custom-file-label {
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+        }
+
+        .custom-file-input:lang(en)~.custom-file-label::after {
+            content: "Pilih file";
+        }
+    </style>
+
 </head>
-<body style="padding-bottom: 100px">
-      <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 w-full" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                    <div class="text-center">
-                        <h4 class="text-white text-center fs-1" style="padding-top: 130px; padding-bottom: 130px;">Tambah Data Brands</h4>
-                    </div>
+
+<body>
+    <!-- Main container for the form -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="form-section">
+                    <h4>Form Tambah Brands</h4>
+                    <form action="/brand/store" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="brand_name">Brand Name</label>
+                            <input type="text" name="brand_name" class="form-control" id="brand_name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="brand_logo">Brand Logo</label>
+                            <!-- Custom file input -->
+                            <div class="custom-file">
+                                <input type="file" name="brand_logo" class="custom-file-input" id="brand_logo" required>
+                                <label class="custom-file-label" for="brand_logo">Pilih file</label>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <a href="/brand" class="btn btn-danger">Kembali</a>
+                        </div>
+                    </form>
                 </div>
             </div>
-      </div>
-      <div class="container-fluid">
-            <div class="row justify-content-center" style="margin-top:13%">
-                  <div class="col-8">
-                        <h4>Form Tambah Brands</h4>
-                        <form action="/brand/store" method="POST" enctype="multipart/form-data">
-                              @csrf
-                              <div class="form-group">
-                                    <label for="brand_name">Brand Name</label>
-                                    <input type="text" name="brand_name" class="form-control" id="brand_name" />
-                              </div>
-                              <div class="form-group">
-                                    <label for="brand_logo">Brand Logo</label>
-                                    <input type="file" name="brand_logo" class="form-control" id="brand_logo">
-                              </div>
-                              <div style="text-align:center">
-                                    <button type="submit" class="btn btn-success">Simpan</button>
-                                    <a href="/brand" class="btn btn-danger">Kembali</a>
-                              </div>
-                        </form>
-                  </div>
-            </div>
-      </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script for custom file input label -->
+    <script>
+        // Update the file input label when a file is selected
+        $('.custom-file-input').on('change', function() {
+            var fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+    </script>
 </body>
+
 </html>

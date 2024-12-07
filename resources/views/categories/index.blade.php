@@ -26,9 +26,9 @@
     <!-- Content Section -->
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Data Categorie</h4>
+            <h4>kelola Kategori</h4>
             <div>
-                <a href="/categorie/create" class="btn btn-primary">Tambah Categorie</a>
+                <a href="/categorie/create" class="btn btn-primary">Tambah Kategori</a>
                 <a href="/admin" class="btn btn-danger">Kembali Ke Beranda</a>
             </div>
         </div>
@@ -38,7 +38,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Category Name</th>
+                            <th>Nama Kategori</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

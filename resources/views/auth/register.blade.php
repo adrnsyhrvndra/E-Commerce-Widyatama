@@ -62,7 +62,7 @@
             </form>
 
             <div class="text-center mt-3">
-                <a href="{{ route('login') }}">Sudah punya akun? Login di sini</a>
+                <span>Sudah punya akun? </span><a href="{{ route('login') }}">Login sekarang</a>
             </div>
         </div>
     </div>

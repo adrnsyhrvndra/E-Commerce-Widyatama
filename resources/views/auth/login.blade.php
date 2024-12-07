@@ -37,7 +37,7 @@
             </form>
 
             <div class="text-center mt-3">
-                <a href="{{ route('register') }}">Belum punya akun? Daftar di sini</a>
+                <span>Belum punya akun? </span><a href="{{ route('register') }}">Daftar sekarang</a>
             </div>
         </div>
     </div>

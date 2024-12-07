@@ -14,31 +14,82 @@
 
     <!-- Custom Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
     <style>
         body {
             font-family: 'Rethink Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        .card {
+            border-radius: 8px;
+        }
+        .card-header {
+            background-color: #343a40;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-sm {
+            font-size: 0.875rem;
+        }
+        .modal-header {
+            background-color: #dc3545;
+            color: white;
+        }
+        .modal-body {
+            font-size: 1.1rem;
+        }
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
         }
     </style>
 </head>
 
-<body class="bg-light">
+<body>
     <!-- Content Section -->
-    <div class="container mt-5">
+    <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Data Brand</h4>
+            <h4>Kelola Brand</h4>
             <div>
                 <a href="/brand/create" class="btn btn-primary">Tambah Brand</a>
                 <a href="/admin" class="btn btn-danger">Kembali Ke Beranda</a>
             </div>
         </div>
         <div class="card shadow-sm">
+            <div class="card-header">
+                Daftar Brand
+            </div>
             <div class="card-body">
                 <table id="brandTable" class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Brand Name</th>
-                            <th>Brand Logo</th>
+                            <th>Nama Brand</th>
+                            <th>Logo Brand</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -48,7 +99,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->brand_name }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/gambarStorage/' . $item->brand_logo) }}" alt="Brand Logo" style="width: 150px; height: auto;">
+                                    <img src="data:image/jpeg;base64,{{ base64_encode($item->brand_logo) }}" alt="Brand Logo" class="profile-img">
                                 </td>
                                 <td>
                                     <a href="/brand/edit/{{ $item->brand_id }}" class="btn btn-sm btn-success">Edit</a>
