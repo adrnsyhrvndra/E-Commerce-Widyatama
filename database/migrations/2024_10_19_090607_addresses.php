@@ -24,6 +24,7 @@ class Addresses extends Migration
             $table->string('postal_code', 20);
             $table->text('full_address');
             $table->text('address_note');
+            $table->enum('is_primary_address', [0,1])->default(0);
             $table->timestamps();
 
             // Defining the foreign key constraints

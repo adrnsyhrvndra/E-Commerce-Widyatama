@@ -70,7 +70,7 @@
 </head>
 
 <body>
-    <!-- Content Section -->
+
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h4>Kelola Brand</h4>
@@ -161,6 +161,25 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}"
+            });
+        @endif
+    
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ session('error') }}"
+            });
+        @endif
+    </script>
+    
 </body>
 
 </html>

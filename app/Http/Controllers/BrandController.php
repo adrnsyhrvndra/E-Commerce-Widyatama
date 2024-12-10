@@ -18,25 +18,33 @@ class BrandController extends Controller {
     }
 
     public function store(Request $request){
-        $request->validate([
-            'brand_name' => 'required|string|max:255|min:3|unique:brands',
-            'brand_logo' => 'image|mimes:jpeg,png,jpg,gif,webp|max:10000',
-        ]);
+        try {
+            
+            $request->validate([
+                'brand_name' => 'required|string|max:255|min:3|unique:brands',
+                'brand_logo' => 'image|mimes:jpeg,png,jpg,gif,webp|max:10000',
+            ]);
+    
+            $brand = new Brand;
+            $brand->brand_name = $request->brand_name;
+    
+            if ($request->hasFile('brand_logo')) {
+                $image = $request->file('brand_logo');
+                $imageData = file_get_contents($image->getRealPath());
+                $brand->brand_logo = $imageData;
+            }
+    
+            $brand->created_at = now();
+            $brand->updated_at = now();
+            $brand->save();
+    
+            return redirect('/brand')->with('success', 'Data brand berhasil ditambahkan');
 
-        $brand = new Brand;
-        $brand->brand_name = $request->brand_name;
+        } catch (\Exception $e) {
 
-        if ($request->hasFile('brand_logo')) {
-            $image = $request->file('brand_logo');
-            $imageData = file_get_contents($image->getRealPath());
-            $brand->brand_logo = $imageData;
+            return redirect('/brand/create')->with('error', 'Data brand gagal disimpan. Coba lagi!');
+            
         }
-
-        $brand->created_at = now();
-        $brand->updated_at = now();
-        $brand->save();
-
-        return redirect('/brand')->with('success', 'Data brand berhasil ditambahkan');
     }
 
     public function edit($brand_id){
@@ -45,32 +53,49 @@ class BrandController extends Controller {
     }
 
     public function update(Request $request, $brand_id){
-        $request->validate([
-            'brand_name' => 'required|string|max:255|min:3|unique:brands',
-            'brand_logo' => 'image|mimes:jpeg,png,jpg,gif|max:10000',
-        ]);
 
-        $brand = Brand::findOrFail($brand_id);
-        $brand->brand_name = $request->brand_name;
+        try {
 
-        if ($request->hasFile('brand_logo')) {
-            if ($brand->brand_logo) {
-                $brand->brand_logo = null;
+            $request->validate([
+                'brand_name' => 'required|string|max:255|min:3|unique:brands',
+                'brand_logo' => 'image|mimes:jpeg,png,jpg,gif|max:10000',
+            ]);
+    
+            $brand = Brand::findOrFail($brand_id);
+            $brand->brand_name = $request->brand_name;
+    
+            if ($request->hasFile('brand_logo')) {
+                if ($brand->brand_logo) {
+                    $brand->brand_logo = null;
+                }
+    
+                $image = $request->file('brand_logo');
+                $imageData = file_get_contents($image->getRealPath());
+                $brand->brand_logo = $imageData;
             }
+    
+            $brand->updated_at = now();
+            $brand->save();
+    
+            return redirect('/brand')->with('success', 'Data brand berhasil diubah');
 
-            $image = $request->file('brand_logo');
-            $imageData = file_get_contents($image->getRealPath());
-            $brand->brand_logo = $imageData;
+        } catch (\Exception $e) {
+
+            return redirect('/brand/edit')->with('error', 'Data brand gagal disimpan. Coba lagi!');
+            
         }
 
-        $brand->updated_at = now();
-        $brand->save();
-
-        return redirect('/brand');
+        
     }
 
     public function destroy($brand_id){
-        Brand::where('brand_id', $brand_id)->delete();
-        return redirect('/brand');
+
+        try {
+            Brand::where('brand_id', $brand_id)->delete();
+            return redirect('/brand')->with('success', 'Data brand berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect('/brand')->with('error', 'Data brand gagal dihapus. Coba lagi!');
+        }
+
     }
 }

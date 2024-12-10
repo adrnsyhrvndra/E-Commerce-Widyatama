@@ -22,33 +22,43 @@ class ProductController extends Controller {
     }
 
     public function store(Request $request){
-        $request->validate([
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'product_name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            'product_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-        ]);
 
-        $product = new Product;
-        $product->category_id = $request->category_id;
-        $product->brand_id = $request->brand_id;
-        $product->product_name = $request->product_name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
+        try {
 
-        if ($request->hasFile('product_image')) {
-            $image = $request->file('product_image');
-            $imageData = file_get_contents($image->getRealPath());
-            $product->product_image = $imageData;
+            $request->validate([
+                'category_id' => 'required',
+                'brand_id' => 'required',
+                'product_name' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'stock' => 'required',
+                'product_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            ]);
+    
+            $product = new Product;
+            $product->category_id = $request->category_id;
+            $product->brand_id = $request->brand_id;
+            $product->product_name = $request->product_name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->stock = $request->stock;
+    
+            if ($request->hasFile('product_image')) {
+                $image = $request->file('product_image');
+                $imageData = file_get_contents($image->getRealPath());
+                $product->product_image = $imageData;
+            }
+    
+            $product->save();
+    
+            return redirect('/product')->with('success', 'Product berhasil ditambahkan!');
+
+        } catch (\Exception $e) {
+
+            return redirect('/product/create')->with('error', 'Product gagal ditambahkan. Coba lagi!');
+
         }
-
-        $product->save();
-
-        return redirect('/product')->with('success', 'Product berhasil ditambahkan!');
+        
     }
 
     public function edit($product_id){
@@ -59,42 +69,59 @@ class ProductController extends Controller {
     }
 
     public function update(Request $request, $product_id){
-        $request->validate([
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'product_name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            'product_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
 
-        $product = Product::findOrFail($product_id);
-        $product->category_id = $request->category_id;
-        $product->brand_id = $request->brand_id;
-        $product->product_name = $request->product_name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->updated_at = now();
-
-        if ($request->hasFile('product_image')) {
-            if ($product->product_image) {
-                $product->product_image = null;
+        try {
+            
+            $request->validate([
+                'category_id' => 'required',
+                'brand_id' => 'required',
+                'product_name' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'stock' => 'required',
+                'product_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ]);
+    
+            $product = Product::findOrFail($product_id);
+            $product->category_id = $request->category_id;
+            $product->brand_id = $request->brand_id;
+            $product->product_name = $request->product_name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->stock = $request->stock;
+            $product->updated_at = now();
+    
+            if ($request->hasFile('product_image')) {
+                if ($product->product_image) {
+                    $product->product_image = null;
+                }
+    
+                $image = $request->file('product_image');
+                $imageData = file_get_contents($image->getRealPath());
+                $product->product_image = $imageData;
             }
+    
+            $product->save();
+    
+            return redirect('/product')->with('success', 'Product berhasil diubah!');
 
-            $image = $request->file('product_image');
-            $imageData = file_get_contents($image->getRealPath());
-            $product->product_image = $imageData;
+
+        } catch (\Exception $e) {
+
+            return redirect('/product/edit')->with('error', 'Product gagal disimpan. Coba lagi!');
+
         }
 
-        $product->save();
-
-        return redirect('/product');
     }
 
     public function destroy($product_id){
-        Product::where('product_id', $product_id)->delete();
-        return redirect('/product');
+
+        try {
+            Product::where('product_id', $product_id)->delete();
+            return redirect('/product')->with('success', 'Product berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect('/product')->with('error', 'Product gagal dihapus. Coba lagi!');
+        }
+
     }
 }
