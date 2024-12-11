@@ -32,6 +32,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="/myorders">My Orders</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/addresses">Manage Addreses</a>
                     </li>
                     <li class="nav-item">
@@ -62,7 +65,20 @@
                             <p class="card-text">{{ Str::limit($product->description, 80) }}</p>
                             <p class="card-text text-success">Price: Rp{{ number_format($product->price, 2) }}</p>
                             <p class="card-text text-primary">Stock: {{ $product->stock }}</p>
-                            <a href="#" class="btn btn-primary">Buy Product</a>
+                            <form action="/order/store" method="POST">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->user_id }}">
+                                <input type="hidden" name="address_id" value="{{ $addresses->address_id }}">
+                                <input type="hidden" name="order_status" value="pending">
+                                <input type="hidden" name="total_price" value="{{ $product->price }}">
+                                <input type="hidden" name="order_date" value="{{ date('Y-m-d') }}">
+                                <input type="hidden" name="product_id" value="{{ $product->product_id }}">
+                                <input type="hidden" name="price" value="{{ $product->price }}">
+                                <div class="d-flex flex-row justify-content-start align-items-center gap-2">
+                                    <input type="number" name="quantity" class="form-control w-25" value="1" min="1" max="{{ $product->stock }}">
+                                    <button type="submit" class="btn btn-primary">Order Now</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

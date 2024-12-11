@@ -10,6 +10,10 @@ class Addresses extends Model{
       protected $fillable = ['user_id', 'address_label', 'receipt_name', 'province', 'city_or_regency', 'district', 'postal_code', 'full_address', 'address_note', 'is_main'];
 
       public function user(){
-          return $this->belongsTo(User::class);
+            return $this->belongsTo(User::class, 'user_id');
+      }
+
+      public function orders(){
+            return $this->hasMany(Order::class, 'address_id');
       }
 }

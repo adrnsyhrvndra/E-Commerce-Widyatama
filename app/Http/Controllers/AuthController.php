@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Categorie;
+use App\Models\Addresses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -86,7 +87,10 @@ class AuthController extends Controller {
 
     public function showStorePage (){
         $products = Product::with(['brands', 'categories'])->get();
-        return view('store/index', compact('products'));
+        $addresses = Addresses::where('user_id', auth()->user()->user_id)
+            ->where('is_primary_address', '1')
+            ->first();
+        return view('store/index', compact('products', 'addresses'));
     }
 
     public function logout(){

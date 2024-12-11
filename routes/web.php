@@ -6,6 +6,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,3 +62,5 @@ Route::get('/', [AuthController::class, 'showStorePage'])->middleware('auth');
 Route::get('/addresses', [StoreController::class, 'showAddresesPage'])->middleware('auth');
 Route::post('/addresses/store', [StoreController::class, 'addAddress'])->middleware('auth');
 Route::put('/addresses/update/{address_id}', [StoreController::class, 'updateAddress'])->middleware('auth');
+Route::post('/order/store', [OrderController::class, 'store'])->middleware('auth');
+Route::get('/myorders', [OrderController::class, 'index'])->middleware('auth');

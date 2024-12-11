@@ -30,6 +30,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="/myorders">My Orders</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="/addresses">Manage Addreses</a>
                     </li>
                     <li class="nav-item">
@@ -152,6 +155,17 @@
                     <div class="form-group">
                         <label for="address_note">Address Note</label>
                         <textarea name="address_note" cols="30" rows="5" class="form-control" id="address_note">{{ old('address_note', $address->address_note ?? '') }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="is_primary_address">Is Primary Address</label>
+                        <select name="is_primary_address" id="is_primary_address" class="form-control">
+                            <option value="1" {{ (isset($address) && $address->is_primary_address == 1) ? 'selected' : '' }}>
+                                Yes
+                            </option>
+                            <option value="0" {{ (isset($address) && $address->is_primary_address == 0) ? 'selected' : '' }}>
+                                No
+                            </option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                 </form>

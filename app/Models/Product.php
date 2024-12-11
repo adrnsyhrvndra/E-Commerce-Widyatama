@@ -13,8 +13,12 @@ class Product extends Model{
             return $this->belongsTo(Brand::class, 'brand_id');
       }
 
-    public function categories(){
+      public function categories(){
             return $this->belongsTo(Categorie::class, 'category_id');
+      }
+
+      public function orderItems(){
+            return $this->hasMany(OrderItem::class, 'order_item_id');
       }
     
 }
