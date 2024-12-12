@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +64,8 @@ Route::get('/addresses', [StoreController::class, 'showAddresesPage'])->middlewa
 Route::post('/addresses/store', [StoreController::class, 'addAddress'])->middleware('auth');
 Route::put('/addresses/update/{address_id}', [StoreController::class, 'updateAddress'])->middleware('auth');
 Route::post('/order/store', [OrderController::class, 'store'])->middleware('auth');
+Route::delete('/order/delete/{order_item_id}', [OrderController::class, 'delete'])->middleware('auth');
 Route::get('/myorders', [OrderController::class, 'index'])->middleware('auth');
+Route::post('/payment/store', [PaymentController::class, 'store'])->middleware('auth');
+Route::get('/payment/edit/{payment_id}', [PaymentController::class, 'choosePaymentMethod'])->middleware('auth');
+Route::put('/payment/update/{payment_id}', [PaymentController::class, 'update'])->middleware('auth');

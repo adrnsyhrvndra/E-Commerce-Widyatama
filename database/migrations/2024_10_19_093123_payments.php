@@ -16,8 +16,9 @@ class Payments extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id('payment_id');
             $table->unsignedBigInteger('order_id');
-            $table->enum('payment_method', ['credit_card', 'bank_transfer', 'cash_on_delivery']);
+            $table->enum('payment_method', ['credit_card', 'bank_transfer', 'cash_on_delivery'])->nullable();
             $table->enum('payment_status', ['pending', 'paid', 'cancelled']);
+            $table->integer('total_price_payment');
             $table->timestamp('payment_date');
             $table->timestamps();
 

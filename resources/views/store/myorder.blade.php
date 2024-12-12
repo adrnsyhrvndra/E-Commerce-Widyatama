@@ -69,64 +69,80 @@
                             <th scope="col">Quantity</th>
                             <th scope="col">Subtotal</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Select</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orderItem as $order)
+
+                        @if ($orderItem->count() > 0)
+                            @foreach ($orderItem as $order)
+                                <tr>
+                                    <td>{{ $order->order_item_id }}</td>
+                                    <td>{{ $order->product->product_name }}</td>
+                                    <td>
+                                        <img src="data:image/jpeg;base64,{{ base64_encode($order->product->product_image) }}" alt="Brand Logo" class="profile-img">
+                                    </td>
+                                    <td>{{ $order->price }}</td>
+                                    <td>{{ $order->quantity }}</td>
+                                    <td>{{ $order->price * $order->quantity }}</td>
+                                    <td>{{ $order->order->order_status }}</td>
+                                    <td>
+                                        <form action="/order/delete/{{ $order->order_item_id }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Hapus Pesanan</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr>
-                                <td>{{ $order->order_item_id }}</td>
-                                <td>{{ $order->product->product_name }}</td>
-                                <td>
-                                    <img src="data:image/jpeg;base64,{{ base64_encode($order->product->product_image) }}" alt="Brand Logo" class="profile-img">
-                                </td>
-                                <td>{{ $order->price }}</td>
-                                <td>{{ $order->quantity }}</td>
-                                <td>{{ $order->price * $order->quantity }}</td>
-                                <td>{{ $order->order->order_status }}</td>
-                                <td>
-                                    <!-- Checkbox with data-price -->
-                                    <input type="checkbox" class="order-checkbox" data-price="{{ $order->price * $order->quantity }}" name="order_status" value="delivered">
-                                </td>
+                                <td colspan="8">Tidak ada pesanan</td>
                             </tr>
-                        @endforeach
+                        @endif
                     </tbody>
                 </table>
                 <!-- Total price -->
-                <h5>Total price yang di select checkbox: Rp <span id="total-price">0</span></h5>
-                <button class="btn btn-primary">Checkout Barang</button>
+                <h5>
+                    Total price Rp
+                    @if ($orderItem->count() > 0)
+                        {{ $order->order->total_price }}
+                    @else
+                        0
+                    @endif
+                </h5>
+                <form action="/payment/store" method="POST">
+                    @csrf
+
+                    @if ($orderItem->count() > 0)
+                        <input type="hidden" name="order_id" value={{$order->order->order_id}}>
+                    @endif
+                    <input type="hidden" name="total_price_payment" id="hidden-total-price" value="{{ $order->order->total_price }}">
+                    <button class="btn btn-primary">Checkout Barang</button>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Ambil semua checkbox
-            const checkboxes = document.querySelectorAll('.order-checkbox');
-            const totalPriceElement = document.getElementById('total-price');
-
-            // Fungsi untuk menghitung total harga
-            const calculateTotalPrice = () => {
-                let totalPrice = 0;
-
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        // Tambahkan harga dari checkbox yang dicentang
-                        totalPrice += parseFloat(checkbox.dataset.price);
-                    }
-                });
-
-                // Update elemen total harga
-                totalPriceElement.textContent = totalPrice.toLocaleString('id-ID');
-            };
-
-            // Tambahkan event listener ke setiap checkbox
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', calculateTotalPrice);
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}"
             });
-        });
+        @endif
+    
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ session('error') }}"
+            });
+        @endif
     </script>
 </body>
 

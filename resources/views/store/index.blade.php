@@ -67,6 +67,11 @@
                             <p class="card-text text-primary">Stock: {{ $product->stock }}</p>
                             <form action="/order/store" method="POST">
                                 @csrf
+
+                                @if ($order != null)
+                                    <input type="hidden" name="order_id" value="{{ $order->order_id }}">
+                                @endif
+
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->user_id }}">
                                 <input type="hidden" name="address_id" value="{{ $addresses->address_id }}">
                                 <input type="hidden" name="order_status" value="pending">
@@ -88,6 +93,24 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}"
+            });
+        @endif
+    
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ session('error') }}"
+            });
+        @endif
+    </script>
 </body>
 
 </html>

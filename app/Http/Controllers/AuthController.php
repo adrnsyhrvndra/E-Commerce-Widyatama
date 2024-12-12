@@ -90,7 +90,15 @@ class AuthController extends Controller {
         $addresses = Addresses::where('user_id', auth()->user()->user_id)
             ->where('is_primary_address', '1')
             ->first();
-        return view('store/index', compact('products', 'addresses'));
+        $user = User::with('orders')->find(auth()->user()->user_id);
+        $order = null;
+
+        // Jika ada data order lebih dari satu sesuai auth user, maka ambil data order pertamanya
+        if ($user->orders->count() > 0) {
+            $order = $user->orders->first();
+        } 
+
+        return view('store/index', compact('products', 'addresses', 'order'));
     }
 
     public function logout(){
