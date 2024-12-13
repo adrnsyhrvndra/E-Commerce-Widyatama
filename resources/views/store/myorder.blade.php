@@ -117,7 +117,8 @@
                     @if ($orderItem->count() > 0)
                         <input type="hidden" name="order_id" value={{$order->order->order_id}}>
                     @endif
-                    <input type="hidden" name="total_price_payment" id="hidden-total-price" value="{{ $order->order->total_price }}">
+                    
+                    <input type="hidden" name="total_price_payment" id="hidden-total-price" value="{{ $orderItem->count() > 0 ? $order->order->total_price : '' }}">
                     <button class="btn btn-primary">Checkout Barang</button>
                 </form>
             </div>

@@ -46,6 +46,103 @@
         </div>
     </nav>
 
+    {{-- @php
+        dd($address);
+    @endphp --}}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <table id="brandTable" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Address Label</th>
+                            <th>Receipt Name</th>
+                            <th>Province</th>
+                            <th>City Or Regency</th>
+                            <th>District</th>
+                            <th>Postal Code</th>
+                            <th>Full Address</th>
+                            <th>Addres Note</th>
+                            <th>Alamat Utama</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($user->addresses as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->address_label }}</td>
+                                <td>{{ $item->receipt_name }}</td>
+                                <td>{{ $item->province }}</td>
+                                <td>{{ $item->city_or_regency }}</td>
+                                <td>{{ $item->district }}</td>
+                                <td>{{ $item->postal_code }}</td>
+                                <td>{{ $item->full_address }}</td>
+                                <td>{{ $item->address_note }}</td>
+                                <td>
+                                    @if ($item->is_primary_address === '1')
+                                        <span class="text-success">Ya</span>
+                                    @else
+                                        <span class="text-danger">Tidak</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($item->is_primary_address === '0')
+                                        <form action="/addresses/updateMainAddress/{{ $item->address_id }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('put')
+                                            <button 
+                                                type="submit" 
+                                                class="btn btn-sm btn-success"
+                                                {{ $hasPrimaryAddress ? 'disabled' : '' }}>
+                                                Set Alamat Utama
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="/addresses/removeMainAddress/{{ $item->address_id }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('put')
+                                            <button 
+                                                type="submit" 
+                                                class="btn btn-sm btn-danger">
+                                                Hapus Alamat Utama
+                                            </button>
+                                        </form>
+                                    @endif
+                                    <a href="/addresses/edit/{{ $item->address_id }}" class="btn btn-sm btn-success">Edit</a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapus{{ $item->address_id }}">Hapus</button>
+                                    <div class="modal fade" id="modalHapus{{ $item->address_id }}" tabindex="-1" aria-labelledby="modalHapusLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Hapus Data</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah Anda yakin ingin menghapus data ini?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                                    <form action="/addresses/delete/{{ $item->address_id }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger">Ya</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <!-- Product Catalog -->
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -53,14 +150,11 @@
                 <h4 class="mb-5">Manage Addreses - {{ Auth::user()->full_name }}</h4>
                 <form 
                     class="d-flex flex-column gap-4" 
-                    action="{{ isset($address) ? '/addresses/update/' . $address->address_id : '/addresses/store' }}"
+                    action="{{'/addresses/store'}}"
                     method="POST" 
                     enctype="multipart/form-data"
                 >
                     @csrf
-                    @if(isset($address))
-                        @method('PUT')
-                    @endif
                     <input type="hidden" name="user_id" value="{{ Auth::user()->user_id }}">
                     <div class="form-group">
                         <label for="address_label">Address Label</label>
@@ -68,8 +162,7 @@
                             type="text" 
                             name="address_label" 
                             class="form-control" 
-                            id="address_label" 
-                            value="{{ old('address_label', $address->address_label ?? '') }}" 
+                            id="address_label"
                         />
                     </div>
                     <div class="form-group">
@@ -79,42 +172,59 @@
                             name="receipt_name" 
                             class="form-control" 
                             id="receipt_name"
-                            value="{{ old('receipt_name', $address->receipt_name ?? '') }}" 
                         />
                     </div>
                     <div class="form-group">
                         <label for="province">Province</label>
                         <select name="province" id="province" class="form-control">
                             <option value="" disabled selected>Pilih Provinsi</option>
-                            <option value="Aceh" {{ (isset($address) && $address->province == 'Aceh') ? 'selected' : '' }}>
+                            <option value="Aceh">
                                 Aceh
                             </option>
-                            <option value="Bali" {{ (isset($address) && $address->province == 'Bali') ? 'selected' : '' }}>
+                            <option value="Bali">
                                 Bali
                             </option>
-                            <option value="Banten" {{ (isset($address) && $address->province == 'Banten') ? 'selected' : '' }}>
+                            <option value="Banten">
                                 Banten
                             </option>
-                            <option value="Bengkulu" {{ (isset($address) && $address->province == 'Bengkulu') ? 'selected' : '' }}>
+                            <option value="Bengkulu">
                                 Bengkulu
                             </option>
-                            <option value="Gorontalo" {{ (isset($address) && $address->province == 'Gorontalo') ? 'selected' : '' }}>
+                            <option value="Gorontalo">
                                 Gorontalo
                             </option>
-                            <option value="Jakarta" {{ (isset($address) && $address->province == 'Jakarta') ? 'selected' : '' }}>
+                            <option value="Jakarta">
                                 Jakarta
                             </option>
-                            <option value="Jambi" {{ (isset($address) && $address->province == 'Jambi') ? 'selected' : '' }}>
+                            <option value="Jambi">
                                 Jambi
                             </option>
-                            <option value="Jawa Barat" {{ (isset($address) && $address->province == 'Jawa Barat') ? 'selected' : '' }}>
+                            <option value="Jawa Barat">
                                 Jawa Barat
                             </option>
-                            <option value="Jawa Tengah" {{ (isset($address) && $address->province == 'Jawa Tengah') ? 'selected' : '' }}>
+                            <option value="Jawa Tengah">
                                 Jawa Tengah
                             </option>
-                            <option value="Jawa Timur" {{ (isset($address) && $address->province == 'Jawa Timur') ? 'selected' : '' }}>
+                            <option value="Jawa Timur">
                                 Jawa Timur
+                            </option>
+                            <option value="Kalimantan Barat">
+                                Kalimantan Barat
+                            </option>
+                            <option value="Kalimantan Selatan">
+                                Kalimantan Selatan
+                            </option>
+                            <option value="Kalimantan Tengah">
+                                Kalimantan Tengah
+                            </option>
+                            <option value="Kalimantan Timur">
+                                Kalimantan Timur
+                            </option>
+                            <option value="Kalimantan Utara">
+                                Kalimantan Utara
+                            </option>
+                            <option value="Kepulauan Riau">
+                                Kepulauan Riau
                             </option>
                         </select>
                     </div>
@@ -125,7 +235,6 @@
                             name="city_or_regency" 
                             class="form-control" 
                             id="city_or_regency"
-                            value="{{ old('city_or_regency', $address->city_or_regency ?? '') }}"
                         />
                     </div>
                     <div class="form-group">
@@ -135,7 +244,6 @@
                             name="district" 
                             class="form-control" 
                             id="district"
-                            value="{{ old('district', $address->district ?? '') }}"
                         />
                     </div>
                     <div class="form-group">
@@ -144,28 +252,16 @@
                             type="text" 
                             name="postal_code" 
                             class="form-control" 
-                            id="postal_code" 
-                            value="{{ old('postal_code', $address->postal_code ?? '') }}"
+                            id="postal_code"
                         />
                     </div>
                     <div class="form-group">
                         <label for="full_address">Full Address</label>
-                        <textarea name="full_address" cols="30" rows="5" class="form-control" id="full_address">{{ old('full_address', $address->full_address ?? '') }}</textarea>
+                        <textarea name="full_address" cols="30" rows="5" class="form-control" id="full_address"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="address_note">Address Note</label>
-                        <textarea name="address_note" cols="30" rows="5" class="form-control" id="address_note">{{ old('address_note', $address->address_note ?? '') }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="is_primary_address">Is Primary Address</label>
-                        <select name="is_primary_address" id="is_primary_address" class="form-control">
-                            <option value="1" {{ (isset($address) && $address->is_primary_address == 1) ? 'selected' : '' }}>
-                                Yes
-                            </option>
-                            <option value="0" {{ (isset($address) && $address->is_primary_address == 0) ? 'selected' : '' }}>
-                                No
-                            </option>
-                        </select>
+                        <textarea name="address_note" cols="30" rows="5" class="form-control" id="address_note"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                 </form>
@@ -175,6 +271,47 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#brandTable').DataTable({
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data yang tersedia",
+                    "infoFiltered": "(disaring dari _MAX_ total data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Berikutnya",
+                        "previous": "Sebelumnya"
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}"
+            });
+        @endif
+    
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ session('error') }}"
+            });
+        @endif
+    </script>
 </body>
 
 </html>
