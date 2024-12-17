@@ -1,0 +1,38 @@
+
+/* Responsive CSS File */
+@media (max-width: 768px) {
+  .page-section {
+    .content-detail{
+      padding: 0 15px;
+      .global-title {
+        font-size: 170px;
+        font-weight: 800;
+      }
+      .sub-title {
+        font-weight: 500;
+        font-size: 25px;
+      }
+      .detail-text{
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width: 480px) {
+  .page-section {
+    .page-decoration-1, .page-decoration-2, .page-decoration-3 {
+      width: 120%;}
+    .content-detail{
+      padding: 0 15px;
+      .global-title {
+        margin-bottom: 90px;
+        font-size: 105px;
+        font-weight: 700;
+      }
+      .sub-title {
+        font-weight: 500;
+        font-size: 22px;
+      }
+    }
+  }
+}

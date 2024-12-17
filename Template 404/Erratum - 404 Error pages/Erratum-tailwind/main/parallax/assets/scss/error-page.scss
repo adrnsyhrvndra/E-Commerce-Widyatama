@@ -1,0 +1,240 @@
+/* CSS File 
+  ===================
+    Item Name: Erratum - 404 Error pages + Coming soon + login Tailwind css Template
+    Author: Ashish Maraviya
+    Version: 4
+    Copyright 2024
+===================*/
+/*------------------------------------------------------------------
+  [ Master css file, Table of contents ]
+  
+  00. General css
+  01. Page css
+  
+------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+  # [Color codes]
+    color: #5076db;
+    color: #5bc86d;
+# */
+
+/*------------------------------------------------------------------
+  [Typography]
+  
+  Body copy:      font-family: 'Montserrat', sans-serif;
+-------------------------------------------------------------------*/
+$font-family: "Montserrat", sans-serif;
+$color-white: #fff;
+$color-detail-text: #777;
+
+/*==============
+  [00] Page General css
+=================*/
+body {
+  font-family: $font-family;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: $font-family;
+}
+.loader {
+  border: 16px solid #111;
+  border-top: 16px double #5076db;
+  border-bottom: 16px double #5076db;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    Transform: rotate(0deg);
+  }
+  100% {
+    Transform: rotate(360deg);
+  }
+}
+/*==============
+  [01] Page css
+=================*/
+.page-section {
+  .content-detail {
+    .btn {
+      a {
+        box-shadow: 0px 5px 20px #e2e0e0;
+        &:hover {
+          box-shadow: none;
+        }
+      }
+    }
+    .global-title {
+      span {
+        animation: animateblur 1s linear forwards;
+        &:nth-child(1) {
+          animation-delay: 1s;
+        }
+        &:nth-child(2) {
+          animation-delay: 2s;
+        }
+        &:nth-child(3) {
+          animation-delay: 3s;
+        }
+      }
+      @keyframes animateblur {
+        0% {
+          opacity: 0;
+          filter: blur(10px);
+        }
+        100% {
+          opacity: 1;
+          filter: blur(0px);
+        }
+      }
+    }
+    .parallax {
+      position: absolute;
+    }
+    #shape1,
+    #shape2,
+    #shape3,
+    #shape4,
+    #shape5,
+    #shape6,
+    #shape7 {
+      opacity: 0.7;
+    }
+    #shape1 {
+      bottom: 20px;
+      right: 500px;
+    }
+    #shape2 {
+      top: 75px;
+      right: 581px;
+    }
+    #shape4 {
+      top: 40px;
+      left: 290px;
+    }
+    #shape5 {
+      bottom: 138px;
+      left: 170px;
+    }
+    #shape3 {
+      top: 300px;
+      right: 250px;
+    }
+    #shape6 {
+      top: 220px;
+      right: 100px;
+    }
+    #shape7 {
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+}
+/* Responsive css */
+@media (max-width: 991px) {
+  .page-section {
+    .content-detail {
+      #shape1,
+      #shape2,
+      #shape3,
+      #shape4,
+      #shape5,
+      #shape6,
+      #shape7 {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .page-section {
+    .content-detail {
+      #shape1,
+      #shape2,
+      #shape3,
+      #shape4,
+      #shape5,
+      #shape6,
+      #shape7 {
+        opacity: 0.5;
+      }
+      #shape2 {
+        right: 150px;
+      }
+    }
+  }
+}
+@media (max-width: 575px) {
+  .page-section {
+    .content-detail {
+      #shape1,
+      #shape2,
+      #shape3,
+      #shape4,
+      #shape5,
+      #shape6,
+      #shape7 {
+        opacity: 0.3;
+      }
+      #shape4 {
+        top: 30px;
+        left: 100px;
+      }
+      #shape6 {
+        top: 130px;
+        right: 50px;
+      }
+      #shape5 {
+        bottom: 25px;
+        left: 60px;
+        display: none;
+      }
+      #shape1 {
+        display: none;
+      }
+    }
+  }
+  .page-section {
+    .content-detail{
+      #timer {
+        padding: 20px 0;
+        .date-box {
+          margin: 8px;
+          padding: 10px;
+          width: 75px !important;
+          height: 75px !important;
+          font-size: 18px;
+          border-radius: 15px !important;
+          .text {
+            font-size: 11px !important;
+          }
+        }
+      }
+    }
+  }
+  .nav-details {
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+@media (max-width: 360px) {
+  .page-section {
+    .content-detail {
+      #shape1,
+      #shape2,
+      #shape3,
+      #shape4,
+      #shape5,
+      #shape6,
+      #shape7 {
+        opacity: 0.2;
+      }
+      #shape2 {
+        display: none;
+      }
+    }
+  }
+}

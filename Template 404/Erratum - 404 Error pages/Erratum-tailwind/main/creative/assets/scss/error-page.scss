@@ -1,0 +1,197 @@
+/* CSS File 
+  ===================
+    Item Name: Erratum - 404 Error pages + Coming soon + login Tailwind css Template
+    Author: Ashish Maraviya
+    Version: 4
+    Copyright 2024
+===================*/
+/*------------------------------------------------------------------
+  [ Master css file, Table of contents ]
+  
+  00. General css
+  01. Page css
+  
+------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+  # [Color codes]
+    color: #5076db;
+    color: #5bc86d;
+# */
+
+/*------------------------------------------------------------------
+  [Typography]
+  
+  Body copy:      font-family: 'Fredoka One', cursive;
+                  $font-family: 'Montserrat', sans-serif;
+-------------------------------------------------------------------*/
+@import "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap";
+
+$font-family: 'Montserrat',
+sans-serif;
+$font-family-title: 'Fredoka One',
+cursive;
+$color-white: #fff;
+$color-detail-text: #777;
+
+/*==============
+  [00] Page General css
+=================*/
+body {
+  font-family: $font-family;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family;
+}
+
+h1 {
+  font-family: $font-family-title;
+  flex-flow: row wrap;
+  span {
+    &:before {
+      background: linear-gradient(45deg, #fc5c7d, #6a82fb, #fc5c7d);
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      content: "";
+      mix-blend-mode: screen;
+    }
+  }
+}
+
+.loader {
+  border: 16px solid #111;
+  border-top: 16px double #5076db;
+  border-bottom: 16px double #5076db;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    Transform: rotate(0deg);
+  }
+
+  100% {
+    Transform: rotate(360deg);
+  }
+}
+
+/*==============
+  [01] Page css
+=================*/
+.page-section {
+  .content-detail {
+    .global-title {
+      display: block;
+      color: #5bc86d;
+      font-size: 150px;
+      font-weight: 800;
+      span {
+        animation: animateblur 1s linear forwards;
+        &:nth-child(1) {
+          animation-delay: 1s;
+        }
+        &:nth-child(2) {
+          animation-delay: 2s;
+        }
+        &:nth-child(3) {
+          animation-delay: 3s;
+        }
+      }
+
+      @keyframes animateblur {
+        0% {
+          opacity: 0;
+          filter: blur(10px);
+        }
+        100% {
+          opacity: 1;
+          filter: blur(0px);
+        }
+      }
+    }
+
+    .back-btn {
+      .btn {
+        box-shadow: 0px 5px 10px #a98ad8;
+        &:hover {
+          box-shadow: 0px 5px 10px #cab6e8;
+        }
+      }
+    }
+
+    .container-txt {
+      .blobs_1 {
+        animation: circlemoves 15s ease-in-out infinite alternate;
+      }
+      .blobs_2 {
+        animation: circlemoves 15s ease-in-out infinite alternate;
+      }
+      .blobs_3 {
+        animation: circlemoves 15s ease-in-out infinite alternate;
+      }
+      .blobs_4 {
+        animation: circlemoves 15s ease-in-out infinite alternate;
+      }
+      .blobs_5 {
+        animation: circlemoves 15s ease-in-out infinite alternate;
+      }
+      .blobs_6 {
+        animation: circlemoves 15s ease-in-out infinite alternate;
+      }
+      .blobs_7 {
+        animation: circlemoves 15s ease-in-out infinite alternate;
+      }
+
+      @keyframes circlemoves {
+        0% {
+          border-radius: 25% 69% 58% 42% / 52% 72% 65% 56%;
+        }
+
+        10% {
+          border-radius: 75% 28% 50% 48% / 70% 44% 55% 29%;
+        }
+
+        20% {
+          border-radius: 47% 53% 29% 67% / 30% 40% 59% 69%;
+        }
+
+        30% {
+          border-radius: 72% 25% 65% 45% / 33% 63% 33% 65%;
+        }
+
+        40% {
+          border-radius: 63% 35% 55% 43% / 25% 25% 75% 75%;
+        }
+
+        50% {
+          border-radius: 35% 63% 73% 33% / 63% 25% 73% 35%;
+        }
+
+        60% {
+          border-radius: 25% 75% 25% 73% / 75% 53% 45% 25%;
+        }
+
+        70% {
+          border-radius: 38% 59% 63% 32% / 72% 62% 32% 24%;
+        }
+
+        80% {
+          border-radius: 53% 44% 36% 62% / 35% 32% 72% 60%;
+        }
+
+        90% {
+          border-radius: 24% 74% 72% 32% / 40% 49% 49% 60%;
+        }
+
+        100% {
+          border-radius: 60% 29% 29% 65% / 68% 75% 30% 32%;
+        }
+      }
+    }
+  }
+}

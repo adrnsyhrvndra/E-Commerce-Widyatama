@@ -1,73 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <div class="container d-flex flex-column justify-content-center align-items-center py-5">
-        <img width="150" class="mb-4" src="{{ asset('storage/gambarStorage/COLORED_PNG.png') }}" alt="">
-        <div class="card shadow-sm p-4" style="width: 100%; max-width: 500px;">
-            <h2 class="text-center mb-4">Register</h2>
+@extends('layouts.auth')
 
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+@section('title', 'Halaman Register')
+
+@section('content')
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img src="images/LOGO_TOKO_UTAMA_COLORED.png" alt="">
                 </div>
-            @endif
-
-            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+            </a>
+        </div>
+        <div class="iofrm-layout">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <img src="images/AUTH_ILLUSTRATION1.png" alt="">
                 </div>
-
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>
+                            Belanja Mudah, Masuk dan Mulai Sekarang!
+                        </h3>
+                        <p>
+                            Daftar sekarang untuk pengalaman belanja terbaik, mudah, cepat, dan penuh keuntungan.
+                        </p>
+                        <div class="page-links">
+                            <a href="/login">Login</a><a href="/register" class="active">Register</a>
+                        </div>
+                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                            @csrf
+                            <input class="form-control" type="text" name="username" placeholder="Username" required>
+                            <input class="form-control" type="email" name="email" placeholder="Email" required>
+                            <input class="form-control" type="text" name="full_name" placeholder="Full Name" required>
+                            <input class="form-control" type="number" name="phone_number" placeholder="Phone Number" required>
+                            <input type="file" class="form-control" id="profile_picture" placeholder="Profile Picture" name="profile_picture">
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+                            <input type="password" class="form-control" id="password_confirmation" placeholder="Password Confirmation" name="password_confirmation" required>
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Register</button> 
+                                {{-- <a href="forget4.html">Forget password?</a> --}}
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <label for="full_name" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="full_name" name="full_name" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="phone_number" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="phone_number" name="phone_number" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="profile_picture" class="form-label">Profile Picture</label>
-                    <input type="file" class="form-control" id="profile_picture" name="profile_picture">
-                </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">Register</button>
-            </form>
-
-            <div class="text-center mt-3">
-                <span>Sudah punya akun? </span><a href="{{ route('login') }}">Login sekarang</a>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}"
+            });
+        @endif
+    
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ session('error') }}"
+            });
+        @endif
+    </script>
+@endsection

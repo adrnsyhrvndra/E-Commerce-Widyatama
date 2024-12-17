@@ -41,7 +41,7 @@ class AuthController extends Controller {
             }
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah']);
+        return back()->with('error', 'Username atau Password Salah!');
     }
 
     public function showRegisterForm(){
@@ -86,7 +86,7 @@ class AuthController extends Controller {
     }
 
     public function showStorePage (){
-        $products = Product::with(['brands', 'categories'])->get();
+        $products = Product::with(['brands', 'categories'])->paginate(10);
         $addresses = Addresses::where('user_id', auth()->user()->user_id)
             ->where('is_primary_address', '1')
             ->first();

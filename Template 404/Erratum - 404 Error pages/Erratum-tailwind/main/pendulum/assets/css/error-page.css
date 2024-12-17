@@ -1,0 +1,144 @@
+/* CSS File 
+  ===================
+    Item Name: Erratum - 404 Error pages + Coming soon + login Tailwind css Template
+    Author: Ashish Maraviya
+    Version: 4
+    Copyright 2024
+===================*/
+/*------------------------------------------------------------------
+  [ Master css file, Table of contents ]
+
+  00. General css
+  01. Page css
+
+------------------------------------------------------------*/
+/*------------------------------------------------------------------
+  # [Color codes]
+    color: #5076db;
+    color: #5bc86d;
+# */
+/*------------------------------------------------------------------
+  [Typography]
+
+  Body copy:      font-family: 'Montserrat', sans-serif;
+-------------------------------------------------------------------*/
+/*==============
+  [00] Page General css
+=================*/
+body {
+  font-family: "Montserrat", sans-serif;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+.loader {
+  border: 16px solid #111;
+  border-top: 16px double #5076db;
+  border-bottom: 16px double #5076db;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+/*==============
+  [01] Page css
+=================*/
+.page-section {
+  overflow: hidden;
+}
+.page-section .content-detail .pendulum-thread {
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+  -webkit-animation: pendulum-move 2.5s ease-in-out infinite;
+          animation: pendulum-move 2.5s ease-in-out infinite;
+}
+.page-section .content-detail .pendulum-shadow {
+  margin: 215px auto 0;
+  -webkit-animation: pendulum-shadow 1.25s ease-in-out alternate infinite;
+          animation: pendulum-shadow 1.25s ease-in-out alternate infinite;
+}
+@-webkit-keyframes pendulum-move {
+  0%, 100% {
+    -webkit-transform: rotate(25deg);
+            transform: rotate(25deg);
+  }
+  50% {
+    -webkit-transform: rotate(-25deg);
+            transform: rotate(-25deg);
+  }
+}
+@keyframes pendulum-move {
+  0%, 100% {
+    -webkit-transform: rotate(25deg);
+            transform: rotate(25deg);
+  }
+  50% {
+    -webkit-transform: rotate(-25deg);
+            transform: rotate(-25deg);
+  }
+}
+@-webkit-keyframes pendulum-shadow {
+  0% {
+    -webkit-transform: translateX(-220px) scale(1.4, 0.5);
+            transform: translateX(-220px) scale(1.4, 0.5);
+    -webkit-filter: blur(20px);
+            filter: blur(20px);
+  }
+  50% {
+    -webkit-filter: blur(3px);
+            filter: blur(3px);
+  }
+  100% {
+    -webkit-transform: translateX(220px) scale(1.4, 0.5);
+            transform: translateX(220px) scale(1.4, 0.5);
+    -webkit-filter: blur(20px);
+            filter: blur(20px);
+  }
+}
+@keyframes pendulum-shadow {
+  0% {
+    -webkit-transform: translateX(-220px) scale(1.4, 0.5);
+            transform: translateX(-220px) scale(1.4, 0.5);
+    -webkit-filter: blur(20px);
+            filter: blur(20px);
+  }
+  50% {
+    -webkit-filter: blur(3px);
+            filter: blur(3px);
+  }
+  100% {
+    -webkit-transform: translateX(220px) scale(1.4, 0.5);
+            transform: translateX(220px) scale(1.4, 0.5);
+    -webkit-filter: blur(20px);
+            filter: blur(20px);
+  }
+}
+/*# sourceMappingURL=error-page.css.map */

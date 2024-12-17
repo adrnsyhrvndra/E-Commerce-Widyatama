@@ -1,0 +1,140 @@
+/*----  Login, Signup and forget password css  ----*/
+/*==============
+  [00] Page General css
+=================*/
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+.loader {
+  border: 16px solid #111;
+  border-top: 16px double #5076db;
+  border-bottom: 16px double #5076db;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    Transform: rotate(0deg);
+  }
+  100% {
+    Transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    Transform: rotate(0deg);
+  }
+  100% {
+    Transform: rotate(360deg);
+  }
+}
+.login-with-btns .google:hover i {
+  color: #db4437;
+}
+.login-with-btns .facebook:hover i {
+  color: #3b5998;
+}
+.login-with-btns .twitter:hover i {
+  color: #00acee;
+}
+.login-with-btns .linkedin:hover i {
+  color: #0e76a8;
+}
+
+/*==============
+  [01] Page css
+=================*/
+.page-section .particles-bg .particles-js-canvas-el {
+  position: absolute;
+}
+
+/* Login Page */
+.login-page #particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+.login-page .login-form,
+.login-page .signup-form,
+.login-page .forgot-form {
+  -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+}
+.login-page .login-form .input-control input[type=text]::-webkit-input-placeholder, .login-page .login-form .input-control input[type=email]::-webkit-input-placeholder, .login-page .login-form .input-control input[type=password]::-webkit-input-placeholder, .login-page .signup-form .input-control input[type=text]::-webkit-input-placeholder, .login-page .signup-form .input-control input[type=email]::-webkit-input-placeholder, .login-page .signup-form .input-control input[type=password]::-webkit-input-placeholder, .login-page .forgot-form .input-control input[type=text]::-webkit-input-placeholder, .login-page .forgot-form .input-control input[type=email]::-webkit-input-placeholder, .login-page .forgot-form .input-control input[type=password]::-webkit-input-placeholder {
+  font-size: 13px;
+}
+.login-page .login-form .input-control input[type=text]::-moz-placeholder, .login-page .login-form .input-control input[type=email]::-moz-placeholder, .login-page .login-form .input-control input[type=password]::-moz-placeholder, .login-page .signup-form .input-control input[type=text]::-moz-placeholder, .login-page .signup-form .input-control input[type=email]::-moz-placeholder, .login-page .signup-form .input-control input[type=password]::-moz-placeholder, .login-page .forgot-form .input-control input[type=text]::-moz-placeholder, .login-page .forgot-form .input-control input[type=email]::-moz-placeholder, .login-page .forgot-form .input-control input[type=password]::-moz-placeholder {
+  font-size: 13px;
+}
+.login-page .login-form .input-control input[type=text]:-ms-input-placeholder, .login-page .login-form .input-control input[type=email]:-ms-input-placeholder, .login-page .login-form .input-control input[type=password]:-ms-input-placeholder, .login-page .signup-form .input-control input[type=text]:-ms-input-placeholder, .login-page .signup-form .input-control input[type=email]:-ms-input-placeholder, .login-page .signup-form .input-control input[type=password]:-ms-input-placeholder, .login-page .forgot-form .input-control input[type=text]:-ms-input-placeholder, .login-page .forgot-form .input-control input[type=email]:-ms-input-placeholder, .login-page .forgot-form .input-control input[type=password]:-ms-input-placeholder {
+  font-size: 13px;
+}
+.login-page .login-form .input-control input[type=text]::-ms-input-placeholder, .login-page .login-form .input-control input[type=email]::-ms-input-placeholder, .login-page .login-form .input-control input[type=password]::-ms-input-placeholder, .login-page .signup-form .input-control input[type=text]::-ms-input-placeholder, .login-page .signup-form .input-control input[type=email]::-ms-input-placeholder, .login-page .signup-form .input-control input[type=password]::-ms-input-placeholder, .login-page .forgot-form .input-control input[type=text]::-ms-input-placeholder, .login-page .forgot-form .input-control input[type=email]::-ms-input-placeholder, .login-page .forgot-form .input-control input[type=password]::-ms-input-placeholder {
+  font-size: 13px;
+}
+.login-page .login-form .input-control input[type=text]::placeholder,
+.login-page .login-form .input-control input[type=email]::placeholder,
+.login-page .login-form .input-control input[type=password]::placeholder,
+.login-page .signup-form .input-control input[type=text]::placeholder,
+.login-page .signup-form .input-control input[type=email]::placeholder,
+.login-page .signup-form .input-control input[type=password]::placeholder,
+.login-page .forgot-form .input-control input[type=text]::placeholder,
+.login-page .forgot-form .input-control input[type=email]::placeholder,
+.login-page .forgot-form .input-control input[type=password]::placeholder {
+  font-size: 13px;
+}
+.login-page .login-form .input-control .label-container:hover input ~ .checkmark,
+.login-page .signup-form .input-control .label-container:hover input ~ .checkmark,
+.login-page .forgot-form .input-control .label-container:hover input ~ .checkmark {
+  background-color: #3c3c3c;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.login-page .login-form .input-control .label-container input[type=checkbox],
+.login-page .signup-form .input-control .label-container input[type=checkbox],
+.login-page .forgot-form .input-control .label-container input[type=checkbox] {
+  outline: 2px solid #868686;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  border-radius: 10px;
+}
+.login-page .login-form .input-control .label-container .checkmark:after,
+.login-page .signup-form .input-control .label-container .checkmark:after,
+.login-page .forgot-form .input-control .label-container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.login-page .login-form .input-control .label-container input:checked ~ .checkmark,
+.login-page .signup-form .input-control .label-container input:checked ~ .checkmark,
+.login-page .forgot-form .input-control .label-container input:checked ~ .checkmark {
+  background-color: #5076db;
+}
+.login-page .login-form .input-control .label-container input:checked ~ .checkmark:after,
+.login-page .signup-form .input-control .label-container input:checked ~ .checkmark:after,
+.login-page .forgot-form .input-control .label-container input:checked ~ .checkmark:after {
+  display: block;
+}
+/*# sourceMappingURL=login.css.map */

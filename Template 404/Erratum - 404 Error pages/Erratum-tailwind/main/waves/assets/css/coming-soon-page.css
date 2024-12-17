@@ -1,0 +1,162 @@
+/* Coming soon */
+/*==============
+  [00] Page General css
+=================*/
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+.loader {
+  border: 16px solid #111;
+  border-top: 16px double #5076db;
+  border-bottom: 16px double #5076db;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes moveit {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: -50px;
+  }
+  100% {
+    left: 0;
+  }
+}
+@keyframes moveit {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: -50px;
+  }
+  100% {
+    left: 0;
+  }
+}
+/*==============
+  [01] Page css
+=================*/
+.page-section {
+  background: -webkit-gradient(linear, left top, left bottom, from(#9647db), to(#180e55));
+  background: linear-gradient(180deg, #9647db, #180e55);
+  overflow: hidden;
+}
+.page-section .content-detail #timer {
+  margin-bottom: 130px;
+  padding: 30px 0;
+  color: #111;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 6;
+}
+.page-section .content-detail #timer .date-box {
+  margin: 8px;
+  padding: 10px;
+  width: 130px;
+  height: 130px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #7a3bbd;
+  font-size: 38px;
+  font-weight: 600;
+  z-index: 2;
+  color: #fff;
+  border-radius: 30px;
+}
+.page-section .content-detail #timer .text {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* Responsive css */
+@media (max-width: 768px) {
+  .page-section .content-detail #timer .date-box {
+    margin: 8px;
+    padding: 10px;
+    width: 85px;
+    height: 85px;
+    font-size: 28px;
+  }
+}
+@media (max-width: 575px) {
+  .page-section .content-detail #timer {
+    padding: 20px 0;
+  }
+  .page-section .content-detail #timer .date-box {
+    margin: 8px;
+    padding: 10px;
+    width: 75px !important;
+    height: 75px !important;
+    font-size: 18px;
+    border-radius: 15px !important;
+  }
+  .page-section .content-detail #timer .date-box .text {
+    font-size: 11px !important;
+  }
+  .nav-details form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+@media (max-width: 480px) {
+  .page-section .page-decoration-1, .page-section .page-decoration-2, .page-section .page-decoration-3 {
+    width: 120%;
+  }
+  .page-section .content-detail {
+    padding: 0 15px;
+  }
+}
+@media (max-width: 360px) {
+  .page-section .content-detail #timer {
+    margin-bottom: 200px;
+  }
+}
+/*# sourceMappingURL=coming-soon-page.css.map */
