@@ -13,6 +13,7 @@
       <link href="{{ asset('store/css/bootstrap.css') }}" rel="stylesheet">
       <link href="{{ asset('store/css/jquery.fancybox.min.css') }}" rel="stylesheet">
       <link href="{{ asset('store/css/jquery-ui.css')}}" rel="stylesheet">
+      <link href="{{ asset('store/css/jquery.bootstrap-touchspin.css')}}" rel="stylesheet">
       <link href="{{ asset('store/css/nice-select.css') }}" rel="stylesheet">
       <link href="{{ asset('store/css/animate.css') }}" rel="stylesheet">
       <link href="{{ asset('store/css/color.css') }}" rel="stylesheet">
@@ -34,6 +35,7 @@
       <script src="{{ asset('store/js/jquery.nice-select.min.js') }}"></script>
       <script src="{{ asset('store/js/isotope.js') }}"></script>
       <script src="{{ asset('store/js/jquery-ui.js') }}"></script>
+      <script src="{{ asset('store/js/jquery.bootstrap-touchspin.js')}}"></script>
 
       <!-- main-js -->
       <script src="{{ asset('store/js/script.js') }}"></script>

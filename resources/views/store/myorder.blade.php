@@ -1,132 +1,155 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.store')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>E-Commerce Store</title>
+@section('title', 'Halaman Cart')
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('content')
 
-    <!-- Custom Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Rethink Sans', sans-serif;
-        }
-
-        img.profile-img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-        }
-    </style>
-</head>
-
-<body class="bg-light">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img width="80" class="mb-4" src="{{ asset('storage/gambarStorage/WHITE_PNG.png') }}" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/myorders">My Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/addresses">Manage Addresses</a>
-                    </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-link nav-link">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+    <div class="boxed_wrapper">
+        <header class="main-header">
+            <div class="header-lower">
+                <div class="auto-container">
+                    <div class="outer-box">
+                        <figure class="logo-box"><a href="index.html"><img width="110" src="images/LOGO_TOKO_UTAMA_COLORED.png" alt=""></a></figure>
+                        <div class="menu-area">
+                            <!--Mobile Navigation Toggler-->
+                            <div class="mobile-nav-toggler">
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                                <i class="icon-bar"></i>
+                            </div>
+                            <nav class="main-menu navbar-expand-md navbar-light">
+                                <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                    <ul class="navigation clearfix">
+                                        <li>
+                                            <a href="/">All Products</a>
+                                        </li>
+                                        <li>
+                                            <a href="/addresses">Manage Addreses</a>
+                                        </li>    
+                                        <li>
+                                            
+                                        </li>    
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <ul class="menu-right-content clearfix">
+                            <li class="shop-cart">
+                                <a href="/myorders"><i class="flaticon-shopping-cart-1"></i><span>3</span></a>
+                            </li>
+                            <li class="shop-cart">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="bg-danger" style="padding-left:18px; padding-right:18px; padding-top:2px; padding-bottom:2px; border-radius:3px; color:white;">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
 
-    <!-- Product Catalog -->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>My Orders</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Order ID</th>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Product Image</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Subtotal</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @if ($orderItem->count() > 0)
-                            @foreach ($orderItem as $order)
-                                <tr>
-                                    <td>{{ $order->order_item_id }}</td>
-                                    <td>{{ $order->product->product_name }}</td>
-                                    <td>
-                                        <img src="data:image/jpeg;base64,{{ base64_encode($order->product->product_image) }}" alt="Brand Logo" class="profile-img">
-                                    </td>
-                                    <td>{{ $order->price }}</td>
-                                    <td>{{ $order->quantity }}</td>
-                                    <td>{{ $order->price * $order->quantity }}</td>
-                                    <td>{{ $order->order->order_status }}</td>
-                                    <td>
-                                        <form action="/order/delete/{{ $order->order_item_id }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Hapus Pesanan</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="8">Tidak ada pesanan</td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
-                <!-- Total price -->
-                <h5>
-                    Total price Rp
-                    @if ($orderItem->count() > 0)
-                        {{ $order->order->total_price }}
-                    @else
-                        0
-                    @endif
-                </h5>
-                <form action="/payment/store" method="POST">
-                    @csrf
-
-                    @if ($orderItem->count() > 0)
-                        <input type="hidden" name="order_id" value={{$order->order->order_id}}>
-                    @endif
-                    
-                    <input type="hidden" name="total_price_payment" id="hidden-total-price" value="{{ $orderItem->count() > 0 ? $order->order->total_price : '' }}">
-                    <button class="btn btn-primary">Checkout Barang</button>
-                </form>
+            <!--sticky Header-->
+            <div class="sticky-header">
+                <div class="auto-container">
+                    <div class="outer-box clearfix">
+                        <div class="logo-box pull-left">
+                            <figure class="logo"><a href="index.html"><img src="assets/images/small-logo.png" alt=""></a></figure>
+                        </div>
+                        <div class="menu-area pull-right">
+                            <nav class="main-menu clearfix"></nav>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </header>
+        <section class="cart-section cart-page">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 table-column">
+                        <div class="table-outer">
+                            <table class="cart-table">
+                                <thead class="cart-header">
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th class="prod-column">Product Name</th>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th class="price">Price</th>
+                                        <th class="quantity">Quantity</th>
+                                        <th>Subtotal</th>
+                                        <th>Status</th>
+                                    </tr>    
+                                </thead>
+                                <tbody>
+                                    @if ($orderItem->count() > 0)
+                                        @foreach ($orderItem as $order)
+                                            <tr>
+                                                <td colspan="4" class="prod-column">
+                                                    <div class="column-box">
+                                                        <form action="/order/delete/{{ $order->order_item_id }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit">
+                                                                <div class="remove-btn">
+                                                                    <i class="flaticon-close"></i>
+                                                                </div>
+                                                            </button>
+                                                        </form>                                                        
+                                                        <div class="prod-thumb">
+                                                            <img src="data:image/jpeg;base64,{{ base64_encode($order->product->product_image) }}" alt="">
+                                                        </div>
+                                                        <div class="prod-title">
+                                                            {{ $order->product->product_name }}
+                                                        </div>    
+                                                    </div>
+                                                </td>
+                                                <td class="price">
+                                                    {{ $order->price }}
+                                                </td>
+                                                <td class="price">
+                                                    {{ $order->quantity  }}
+                                                </td>
+                                                <td class="sub-total">
+                                                    {{ $order->price * $order->quantity }}
+                                                </td>
+                                                <td class="sub-total">
+                                                    {{ $order->order->order_status }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-total mt-5">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-12 col-md-12 offset-xl-7 cart-column">
+                            <div class="total-cart-box clearfix">
+                                <h4>Cart Totals</h4>
+                                <ul class="list clearfix">
+                                    @if ($orderItem->count() > 0)
+                                        <li>
+                                            Rp {{ number_format($order->order->total_price,2) }}
+                                        </li>
+                                    @endif
+                                </ul>
+                                <form action="/payment/store" method="POST">
+                                    @csrf            
+                                    @if ($orderItem->count() > 0)
+                                        <input type="hidden" name="order_id" value={{$order->order->order_id}}>
+                                    @endif                                    
+                                    <input type="hidden" name="total_price_payment" id="hidden-total-price" value="{{ $orderItem->count() > 0 ? $order->order->total_price : '' }}">
+                                    <button style="width: 100%; display:block;" class="theme-btn-two">Checkout Barang<i class="flaticon-right-1"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         @if (session('success'))
@@ -145,6 +168,5 @@
             });
         @endif
     </script>
-</body>
 
-</html>
+@endsection
