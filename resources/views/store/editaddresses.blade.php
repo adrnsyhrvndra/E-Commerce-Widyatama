@@ -1,3 +1,13 @@
+@extends('layouts.store')
+
+@section('title', 'Halaman Edit Alamat')
+
+@section('content')
+
+
+@endsection
+
+
 <!DOCTYPE html>
 <html>
 <head>
