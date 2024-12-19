@@ -1,4 +1,100 @@
-<!doctype html>
+@extends('layouts.admin')
+
+@section('title', 'Halaman Brand')
+
+@section('content')
+
+    <div id="layout-wrapper">
+        @include('layouts.partials.headerAdmin')
+        @include('layouts.partials.sidebarAdmin')
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18">Halaman Data Brand</h4>
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">Brand</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Atur Data Brand</h4>
+                                    <p class="card-title-desc">
+                                        Ayo atur data brand disini untuk memudahkan penjualan anda.
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                        <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Brand</th>
+                                            <th>Logo Brand</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($brand as $item)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $item->brand_name }}</td>
+                                                    <td>
+                                                        <img width="60" src="data:image/jpeg;base64,{{ base64_encode($item->brand_logo) }}" alt="Brand Logo" class="profile-img">
+                                                    </td>
+                                                    <td>
+                                                        <a href="/brand/edit/{{ $item->brand_id }}" class="btn btn-sm btn-success">Edit</a>
+                                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapus{{ $item->brand_id }}">Hapus</button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modalHapus{{ $item->brand_id }}" tabindex="-1" aria-labelledby="modalHapusLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Hapus Data</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Apakah Anda yakin ingin menghapus data ini?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                                                        <form action="/brand/destroy/{{ $item->brand_id }}" method="post">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button type="submit" class="btn btn-danger">Ya</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @include('layouts.partials.footerAdmin')
+        </div>
+    </div>
+
+@endsection
+
+
+{{-- <!doctype html>
 <html lang="en">
 
 <head>
@@ -182,4 +278,4 @@
     
 </body>
 
-</html>
+</html> --}}
