@@ -155,26 +155,12 @@
                     </div>
                 </div>
             </div>
-
-            <!--sticky Header-->
-            <div class="sticky-header">
-                <div class="auto-container">
-                    <div class="outer-box clearfix">
-                        <div class="logo-box pull-left">
-                            <figure class="logo"><a href="index.html"><img src="assets/images/small-logo.png" alt=""></a></figure>
-                        </div>
-                        <div class="menu-area pull-right">
-                            <nav class="main-menu clearfix"></nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </header>
         <section class="shop-page-section shop-page-1">
             <div class="auto-container">
                 <div class="row">
                     <div class="col-12">
-                        <h6>Data Alamat</h6>
+                        <h4>Data Alamat</h4>
                         <table id="addressesTable" class="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -269,17 +255,23 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-12">
-                        <h6>Tambah Alamat</h6>
+                        <h4>Tambah Alamat</h4>
                     </div>
                     <div class="col-12 mt-4">
                         <form
-                            style="display:flex; flex-direction: column; row-gap: 9px;" 
+                            style="
+                                display: grid;
+                                grid-template-columns: repeat(2, 1fr);
+                                column-gap: 20px;
+                                row-gap: 15px;
+                            " 
                             action="{{'/addresses/store'}}"
                             method="POST" 
                             enctype="multipart/form-data"
                         >
                             @csrf
                             <input type="hidden" name="user_id" value="{{ Auth::user()->user_id }}">
+
                             <div class="form-group">
                                 <label for="address_label">Address Label</label>
                                 <input 
@@ -289,6 +281,7 @@
                                     id="address_label"
                                 />
                             </div>
+
                             <div class="form-group">
                                 <label for="receipt_name">Receipt Name</label>
                                 <input 
@@ -298,60 +291,30 @@
                                     id="receipt_name"
                                 />
                             </div>
+
                             <div class="form-group">
                                 <label for="province">Province</label>
                                 <select name="province" id="province" class="form-control w-100">
                                     <option value="" disabled selected>Pilih Provinsi</option>
-                                    <option value="Aceh">
-                                        Aceh
-                                    </option>
-                                    <option value="Bali">
-                                        Bali
-                                    </option>
-                                    <option value="Banten">
-                                        Banten
-                                    </option>
-                                    <option value="Bengkulu">
-                                        Bengkulu
-                                    </option>
-                                    <option value="Gorontalo">
-                                        Gorontalo
-                                    </option>
-                                    <option value="Jakarta">
-                                        Jakarta
-                                    </option>
-                                    <option value="Jambi">
-                                        Jambi
-                                    </option>
-                                    <option value="Jawa Barat">
-                                        Jawa Barat
-                                    </option>
-                                    <option value="Jawa Tengah">
-                                        Jawa Tengah
-                                    </option>
-                                    <option value="Jawa Timur">
-                                        Jawa Timur
-                                    </option>
-                                    <option value="Kalimantan Barat">
-                                        Kalimantan Barat
-                                    </option>
-                                    <option value="Kalimantan Selatan">
-                                        Kalimantan Selatan
-                                    </option>
-                                    <option value="Kalimantan Tengah">
-                                        Kalimantan Tengah
-                                    </option>
-                                    <option value="Kalimantan Timur">
-                                        Kalimantan Timur
-                                    </option>
-                                    <option value="Kalimantan Utara">
-                                        Kalimantan Utara
-                                    </option>
-                                    <option value="Kepulauan Riau">
-                                        Kepulauan Riau
-                                    </option>
+                                    <option value="Aceh">Aceh</option>
+                                    <option value="Bali">Bali</option>
+                                    <option value="Banten">Banten</option>
+                                    <option value="Bengkulu">Bengkulu</option>
+                                    <option value="Gorontalo">Gorontalo</option>
+                                    <option value="Jakarta">Jakarta</option>
+                                    <option value="Jambi">Jambi</option>
+                                    <option value="Jawa Barat">Jawa Barat</option>
+                                    <option value="Jawa Tengah">Jawa Tengah</option>
+                                    <option value="Jawa Timur">Jawa Timur</option>
+                                    <option value="Kalimantan Barat">Kalimantan Barat</option>
+                                    <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+                                    <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                                    <option value="Kalimantan Timur">Kalimantan Timur</option>
+                                    <option value="Kalimantan Utara">Kalimantan Utara</option>
+                                    <option value="Kepulauan Riau">Kepulauan Riau</option>
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="city_or_regency">City or Regency</label>
                                 <input 
@@ -361,6 +324,7 @@
                                     id="city_or_regency"
                                 />
                             </div>
+
                             <div class="form-group">
                                 <label for="district">District</label>
                                 <input 
@@ -370,6 +334,7 @@
                                     id="district"
                                 />
                             </div>
+
                             <div class="form-group">
                                 <label for="postal_code">Postal Code</label>
                                 <input 
@@ -379,16 +344,26 @@
                                     id="postal_code"
                                 />
                             </div>
-                            <div class="form-group">
+
+                            <div class="form-group" style="grid-column: span 2;">
                                 <label for="full_address">Full Address</label>
                                 <textarea name="full_address" cols="30" rows="5" class="form-control" id="full_address"></textarea>
                             </div>
-                            <div class="form-group">
+
+                            <div class="form-group" style="grid-column: span 2;">
                                 <label for="address_note">Address Note</label>
                                 <textarea name="address_note" cols="30" rows="5" class="form-control" id="address_note"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-3 py-3" style="font-size:17px;">Simpan</button>
+
+                            <button 
+                                type="submit" 
+                                class="btn btn-primary mt-3 py-3" 
+                                style="font-size: 17px; grid-column: span 2;"
+                            >
+                                Simpan
+                            </button>
                         </form>
+
                     </div>
                 </div>
             </div>
