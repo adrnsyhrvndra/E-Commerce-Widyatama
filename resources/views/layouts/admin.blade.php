@@ -41,6 +41,8 @@
         <script src="{{ asset('administrator/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}"></script>
         <script src="{{ asset('administrator/assets/js/pages/dashboard.init.js') }}"></script>
         <script src="{{ asset('administrator/assets/libs/dropzone/min/dropzone.min.js')}}"></script>
+        <script src="{{ asset('administrator/assets/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js')}}"></script>
+        <script src="{{ asset('administrator/assets/js/pages/form-editor.init.js')}}"></script>
         <script src="{{ asset('administrator/assets/js/app.js') }}"></script>
     </body>
 </html>

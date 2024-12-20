@@ -99,6 +99,8 @@ class ProductController extends Controller {
                 $image = $request->file('product_image');
                 $imageData = file_get_contents($image->getRealPath());
                 $product->product_image = $imageData;
+            } else {
+                $product->product_image = $product->product_image;
             }
     
             $product->save();

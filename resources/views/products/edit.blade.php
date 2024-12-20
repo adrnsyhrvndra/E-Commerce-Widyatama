@@ -1,90 +1,162 @@
-<!DOCTYPE html>
-<html>
-<head>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-      <!-- Custom Local Font -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-      <style>
-            body {
-                  font-family: 'Rethink Sans', sans-serif;
-            }
-      </style>
-      <title>Form Update Produk</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-      <script src="{{ asset('assets/jquery.js') }}"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-</head>
-<body style="padding-bottom: 100px">
-      <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 w-full" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                    <div class="text-center">
-                        <h4 class="text-white text-center fs-1" style="padding-top: 130px; padding-bottom: 130px;">Update Data Product</h4>
-                    </div>
-                </div>
-            </div>
-      </div>
-      <div class="container-fluid">
-            <div class="row justify-content-center" style="margin-top:13%">
-                  <div class="col-8">
-                        <h4>Form Update Product</h4>
+@extends('layouts.admin')
+
+@section('title', 'Halaman Edit Product')
+
+@section('content')
+
+      <div id="layout-wrapper">
+            @include('layouts.partials.headerAdmin')
+            @include('layouts.partials.sidebarAdmin')
+            <div class="main-content">
+                  <div class="page-content">
+                  <div class="container-fluid">
+                        <div class="row">
+                              <div class="col-12">
+                              <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Halaman Data Product</h4>
+                                    <div class="page-title-right">
+                                          <ol class="breadcrumb m-0">
+                                          <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                          <li class="breadcrumb-item"><a href="/product">Product</a></li>
+                                          <li class="breadcrumb-item active">Edit Product</li>
+                                          </ol>
+                                    </div>
+                              </div>
+                              </div>
+                        </div>
                         <form action="/product/update/{{ $product->product_id }}" method="POST" enctype="multipart/form-data">
                               @csrf
                               @method('put')
-                              <div class="form-group">
-                                    <label for="category_id">Category Name</label>
-                                    <select name="category_id" id="category_id" class="form-control">
-                                          {{-- selected option --}}
-                                          @foreach ($categories as $category)
-                                                <option value="{{$category->category_id }}" {{ $product->category_id == $category->category_id ? 'selected' : '' }}>
-                                                      {{ $category->category_name }}
-                                                </option>
-                                          @endforeach
-                                    </select>
+                              <div class="row">
+                              <div class="col-12">
+                                    <div class="card">
+                                          <div class="card-header">
+                                          <h4 class="card-title">Edit Data Product</h4>
+                                          <p class="card-title-desc">
+                                                Ayo edit data product disini untuk memudahkan penjualan anda.
+                                          </p>
+                                          </div>
+                                          <div class="card-body">
+                                          <div class="row">
+                                                <div class="col-6">
+                                                      <div class="mb-3">
+                                                            <label for="category_id" class="form-label">Category Name</label>
+                                                            <select name="category_id" id="category_id" class="form-select">
+                                                                  {{-- selected option --}}
+                                                                  @foreach ($categories as $category)
+                                                                        <option value="{{$category->category_id }}" {{ $product->category_id == $category->category_id ? 'selected' : '' }}>
+                                                                              {{ $category->category_name }}
+                                                                        </option>
+                                                                  @endforeach
+                                                            </select>
+                                                      </div>
+                                                </div>
+                                                <div class="col-6">
+                                                      <div class="mb-3">
+                                                            <label for="brand_id" class="form-label">Brand Name</label>
+                                                            <select name="brand_id" id="brand_id" class="form-select">
+                                                                  @foreach ($brands as $brand)
+                                                                        <option value="{{ $brand->brand_id }}" {{ $product->brand_id == $brand->brand_id ? 'selected' : '' }}>
+                                                                              {{ $brand->brand_name }}
+                                                                        </option>
+                                                                  @endforeach
+                                                            </select>
+                                                      </div>
+                                                </div>
+                                                <div class="col-6">
+                                                      <div class="mb-3">
+                                                            <label for="product_name">Product Name</label>
+                                                            <input type="text" name="product_name" class="form-control" id="product_name" value="{{ $product->product_name }}" />
+                                                      </div>
+                                                </div>
+                                                <div class="col-6">
+                                                      <div class="mb-3">
+                                                            <label for="price	">Price</label>
+                                                            <input type="number" name="price" id="price" class="form-control" value="{{ $product->price }}">
+                                                      </div>
+                                                </div>
+                                                <div class="col-6">
+                                                      <div class="mb-3">
+                                                            <label for="stock	">Stock</label>
+                                                            <input type="number" name="stock" id="stock" class="form-control" value="{{ $product->stock }}">
+                                                      </div>
+                                                      <div class="mb-3">
+                                                            <h6>Update Product Image</h6>
+                                                            <div id="dropzone-area" class="dropzone">
+                                                                  <div class="fallback">
+                                                                        <input name="product_image" type="file">
+                                                                  </div>
+                                                                  <div class="dz-message needsclick">
+                                                                        <div class="mb-3">
+                                                                        <i class="display-4 text-muted bx bx-cloud-upload"></i>
+                                                                        </div>
+                                                                        <h5>Ayo update image product disini.</h5>
+                                                                  </div>
+                                                            </div>
+                                                      </div> 
+                                                </div>
+                                                <div class="col-6">
+                                                      <div class="mb-3">
+                                                            <label for="ckeditor-classic">Description</label>
+                                                            <textarea type="text" id="ckeditor-classic" name="description">{{ $product->description }}</textarea>
+                                                      </div>
+                                                </div>
+                                                <div class="col-2">
+                                                      <h6>Old Product Image</h6>
+                                                      <img class="rounded me-2 w-100" alt="200x200" src="data:image/jpeg;base64,{{ base64_encode($product->product_image)}}" data-holder-rendered="true">
+                                                </div>
+                                          </div>                                    
+                                          <div class="row justify-content-end mb-3 mt-2">
+                                                <div class="col-6 text-end">
+                                                      <a href="/Product" class="btn btn-danger waves-effect waves-light w-lg">
+                                                      <i class="mdi mdi-keyboard-backspace font-size-16 align-middle"></i>
+                                                      Kembali
+                                                      </a>
+                                                      <button type="submit" class="btn btn-success waves-effect waves-light w-lg">
+                                                      <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle"></i>
+                                                      Update Data Product
+                                                      </button>
+                                                </div>
+                                          </div>
+                                          </div>
+                                    </div>
                               </div>
-                              <div class="form-group">
-                                    <label for="brand_id">Brand Name</label>
-                                    <select name="brand_id" id="brand_id" class="form-control">
-                                          @foreach ($brands as $brand)
-                                                <option value="{{ $brand->brand_id }}" {{ $product->brand_id == $brand->brand_id ? 'selected' : '' }}>
-                                                      {{ $brand->brand_name }}
-                                                </option>
-                                          @endforeach
-                                    </select>
-                              </div>
-                              <div class="form-group">
-                                    <label for="product_name">Product Name</label>
-                                    <input type="text" name="product_name" class="form-control" id="product_name" value="{{ $product->product_name }}" />
-                              </div>
-                              <div class="form-group">
-                                    <label for="description	">Description</label>
-                                    <textarea name="description" id="description" cols="30" rows="10">{{ $product->description }}</textarea>
-                              </div>
-                              <div class="form-group">
-                                    <label for="price	">Price</label>
-                                    <input type="number" name="price" id="price" class="form-control" value="{{ $product->price }}">
-                              </div>
-                              <div class="form-group">
-                                    <label for="stock	">Stock</label>
-                                    <input type="number" name="stock" id="stock" class="form-control" value="{{ $product->stock }}">
-                              </div>
-                              <div class="form-group">
-                                    <label for="product_image">Product Image</label>
-                                    <input type="file" name="product_image" class="form-control" id="product_image" value="{{ $product->product_image }}">
-                              </div>
-                              <div style="text-align:center">
-                                    <button type="submit" class="btn btn-success">
-                                          Simpan
-                                    </button>
-                                    <a href="/product" class="btn btn-danger">
-                                          Kembali
-                                    </a>
                               </div>
                         </form>
                   </div>
+                  </div>
+                  @include('layouts.partials.footerAdmin')
             </div>
       </div>
-</body>
-</html>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+
+            Dropzone.autoDiscover = false;
+            const dropzone = new Dropzone("#dropzone-area", {
+                  url: "/Product/upload-logo",
+                  maxFiles: 1,
+                  acceptedFiles: "image/*",
+                  addRemoveLinks: true,
+                  dictDefaultMessage: "Drop files here or click to upload.",
+            });
+
+            @if (session('success'))
+                  Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil!',
+                  text: "{{ session('success') }}"
+                  });
+            @endif
+
+            @if (session('error'))
+                  Swal.fire({
+                  icon: 'error',
+                  title: 'Gagal!',
+                  text: "{{ session('error') }}"
+                  });
+            @endif
+      </script>
+
+@endsection

@@ -39,15 +39,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-3">
-                                                <div class="mb-3">
-                                                    <label for="brand_name" class="form-label">Brand Name</label>
-                                                    <input class="form-control" type="text" name="brand_name" id="brand_name" value="{{ $brand->brand_name }}" required>
-                                                </div>
-                                          </div>
-                                          <div class="col-2">
-                                              <h6>Old Brand Logo</h6>
-                                              <img class="rounded me-2 w-100" alt="200x200" src="data:image/jpeg;base64,{{ base64_encode($brand->brand_logo)}}" data-holder-rendered="true">
-                                          </div>
+                                                    <div class="mb-3">
+                                                        <label for="brand_name" class="form-label">Brand Name</label>
+                                                        <input class="form-control" type="text" name="brand_name" id="brand_name" value="{{ $brand->brand_name }}" required>
+                                                    </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <h6>Old Brand Logo</h6>
+                                                <img class="rounded me-2 w-100" alt="200x200" src="data:image/jpeg;base64,{{ base64_encode($brand->brand_logo)}}" data-holder-rendered="true">
+                                            </div>
                                             <div class="col-7">              
                                                 <div class="mb-3">
                                                     <h6>Update Brand Logo</h6>
@@ -61,7 +61,7 @@
                                                             </div>
                                                             <h5>Ayo update logo brand disini.</h5>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>         
                                             </div>
                                         </div>                                    
