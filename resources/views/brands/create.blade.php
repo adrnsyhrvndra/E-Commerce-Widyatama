@@ -1,125 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.admin')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Form Tambah Brands</title>
+@section('title', 'Halaman Tambah Brand')
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+@section('content')
 
-    <!-- Custom Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-
-    <!-- Custom Styles -->
-    <style>
-        body {
-            font-family: 'Rethink Sans', sans-serif;
-            background-color: #f8f9fa;
-        }
-
-        .container {
-            margin-top: 5%;
-        }
-
-        .form-section {
-            margin-top: 5%;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-        .btn {
-            padding: 10px 20px;
-        }
-
-        .form-control {
-            border-radius: 0.375rem;
-        }
-
-        .form-section h4 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .form-section .form-group label {
-            font-weight: bold;
-        }
-
-        .form-section .col-8 {
-            max-width: 700px;
-        }
-
-        /* Custom file input style */
-        .custom-file-label {
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-        }
-
-        .custom-file-input:lang(en)~.custom-file-label::after {
-            content: "Pilih file";
-        }
-    </style>
-
-</head>
-
-<body>
-    <!-- Main container for the form -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <div class="form-section">
-                    <h4>Form Tambah Brands</h4>
-                    <form action="/brand/store" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="brand_name">Brand Name</label>
-                            <input type="text" name="brand_name" class="form-control" id="brand_name" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="brand_logo">Brand Logo</label>
-                            <!-- Custom file input -->
-                            <div class="custom-file">
-                                <input type="file" name="brand_logo" class="custom-file-input" id="brand_logo" required>
-                                <label class="custom-file-label" for="brand_logo">Pilih file</label>
+    <div id="layout-wrapper">
+        @include('layouts.partials.headerAdmin')
+        @include('layouts.partials.sidebarAdmin')
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18">Halaman Data Brand</h4>
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="/brand">Brand</a></li>
+                                        <li class="breadcrumb-item active">Tambah Brand</li>
+                                    </ol>
+                                </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                            <a href="/brand" class="btn btn-danger">Kembali</a>
+                    </div>
+                    <form action="/brand/store" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Tambah Data Brand</h4>
+                                        <p class="card-title-desc">
+                                            Ayo tambah data brand disini untuk memudahkan penjualan anda.
+                                        </p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label for="brand_name" class="form-label">Brand Name</label>
+                                                    <input class="form-control" type="text" name="brand_name" id="brand_name" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">              
+                                                <div class="mb-3">
+                                                    <h6>Brand Logo</h6>
+                                                    <div id="dropzone-area" class="dropzone">
+                                                        <div class="fallback">
+                                                            <input name="brand_logo" type="file">
+                                                        </div>
+                                                        <div class="dz-message needsclick">
+                                                            <div class="mb-3">
+                                                                <i class="display-4 text-muted bx bx-cloud-upload"></i>
+                                                            </div>
+                                                            <h5>Ayo tambah logo brand disini.</h5>
+                                                        </div>
+                                                    </form>
+                                                </div>         
+                                            </div>
+                                        </div>                                    
+                                        <div class="row justify-content-end mb-3 mt-2">
+                                            <div class="col-6 text-end">
+                                                <a href="/brand" class="btn btn-danger waves-effect waves-light w-lg">
+                                                    <i class="mdi mdi-keyboard-backspace font-size-16 align-middle"></i>
+                                                    Kembali
+                                                </a>
+                                                <button type="submit" class="btn btn-success waves-effect waves-light w-lg">
+                                                    <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle"></i>
+                                                    Tambah Data Brand
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
+            @include('layouts.partials.footerAdmin')
         </div>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script for custom file input label -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Update the file input label when a file is selected
-        $('.custom-file-input').on('change', function() {
-            var fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(fileName);
-        });
-    </script>
-</body>
 
-</html>
+        Dropzone.autoDiscover = false;
+        const dropzone = new Dropzone("#dropzone-area", {
+            url: "/brand/upload-logo",
+            maxFiles: 1,
+            acceptedFiles: "image/*",
+            addRemoveLinks: true,
+            dictDefaultMessage: "Drop files here or click to upload.",
+        });
+
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}"
+            });
+        @endif
+
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ session('error') }}"
+            });
+        @endif
+    </script>
+
+@endsection

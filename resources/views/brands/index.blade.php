@@ -85,6 +85,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row justify-content-end">
+                        <div class="col-6 text-end">
+                            <a href="/brand/create" class="btn btn-success waves-effect waves-light w-lg">
+                                <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle me-2"></i>
+                                Tambah Data Brand
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             @include('layouts.partials.footerAdmin')

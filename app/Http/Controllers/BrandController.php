@@ -72,6 +72,8 @@ class BrandController extends Controller {
                 $image = $request->file('brand_logo');
                 $imageData = file_get_contents($image->getRealPath());
                 $brand->brand_logo = $imageData;
+            } else {
+                $brand->brand_logo = $brand->brand_logo;
             }
     
             $brand->updated_at = now();
