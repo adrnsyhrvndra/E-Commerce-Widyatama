@@ -28,6 +28,12 @@
                                     <span data-key="t-dashboard">Product</span>
                               </a>
                         </li>
+                        <li>
+                              <a href="/user">
+                                    <i class="mdi mdi-account-group"></i>
+                                    <span data-key="t-dashboard">Users</span>
+                              </a>
+                        </li>
                   </ul>
             </div>
       </div>

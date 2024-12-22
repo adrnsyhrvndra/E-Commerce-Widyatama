@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,13 @@ Route::middleware(['auth', 'checkRole:admin'])->group(function () {
       Route::get('/product/edit/{product_id}', [ProductController::class, 'edit']);
       Route::put('/product/update/{product_id}', [ProductController::class, 'update']);
       Route::delete('/product/destroy/{product_id}', [ProductController::class, 'destroy']);
+
+      // User Routes
+      Route::get('/user', [UsersController::class, 'index']);
+      Route::get('/user/create', [UsersController::class, 'create']);
+      Route::post('/user/store', [UsersController::class, 'store']);
+      Route::get('/user/edit/{user_id}', [UsersController::class, 'edit']);
+      Route::put('/user/update/{user_id}', [UsersController::class, 'update']);
 });
 
 // Auth Routes
