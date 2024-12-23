@@ -57,6 +57,15 @@ Route::middleware(['auth', 'checkRole:admin'])->group(function () {
       Route::post('/user/store', [UsersController::class, 'store']);
       Route::get('/user/edit/{user_id}', [UsersController::class, 'edit']);
       Route::put('/user/update/{user_id}', [UsersController::class, 'update']);
+      Route::delete('/user/destroy/{user_id}', [UsersController::class, 'destroy']);
+
+      // Order Routes
+      Route::get('/orderAdmin', [OrderController::class, 'orderAdmin']);
+      Route::put('/orderAdmin/update/{order_id}', [OrderController::class, 'orderAdminUpdate']);
+
+      // Payment Routes
+      Route::get('/paymentAdmin', [PaymentController::class, 'paymentAdmin']);
+      Route::put('/paymentAdmin/update/{order_id}', [PaymentController::class, 'paymentAdminUpdate']);
 });
 
 // Auth Routes

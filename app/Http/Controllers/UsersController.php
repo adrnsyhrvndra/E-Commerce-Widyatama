@@ -71,8 +71,12 @@ class UsersController extends Controller
     }
 
     public function destroy($id){
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect('/');
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect('/user')->with('success', 'User berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect('/user')->with('error', 'User gagal dihapus. Coba lagi!');
+        }
     }
 }

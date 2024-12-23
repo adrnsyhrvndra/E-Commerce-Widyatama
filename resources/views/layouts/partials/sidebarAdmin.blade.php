@@ -34,6 +34,18 @@
                                     <span data-key="t-dashboard">Users</span>
                               </a>
                         </li>
+                        <li>
+                              <a href="/orderAdmin">
+                                    <i class="mdi mdi-cart-check"></i>
+                                    <span data-key="t-dashboard">Order Status</span>
+                              </a>
+                        </li>
+                        <li>
+                              <a href="/paymentAdmin">
+                                    <i class="mdi mdi-account-cash"></i>
+                                    <span data-key="t-dashboard">Payment Status</span>
+                              </a>
+                        </li>
                   </ul>
             </div>
       </div>

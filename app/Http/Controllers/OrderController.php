@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
+use App\Models\Addresses;
 
 class OrderController extends Controller{
 
@@ -17,6 +18,24 @@ class OrderController extends Controller{
         })->get();
     
         return view('store.myorder', compact('orderItem'));
+    }
+
+    public function orderAdmin(){
+        $order = Order::with(['address', 'user','orderItems.product'])->get();
+        return view('order.index', compact('order'));
+    }
+
+    public function orderAdminUpdate(Request $request, $order_id){
+        try {
+            $orderStatus = Order::find($request->order_id);
+            $orderStatus->order_status = $request->order_status;
+            $orderStatus->save();
+
+            return redirect('/orderAdmin')->with('success', 'Order Status berhasil diubah');
+
+        } catch (\Exception $e) {
+            return redirect('/orderAdmin')->with('error', 'Order Status gagal diubah. Coba lagi!');
+        }
     }
 
     public function store(Request $request){
