@@ -42,7 +42,7 @@
                                             <th>Jumlah Produk Yang Dibeli</th>
                                             <th>Total Pembelian</th>
                                             <th>Status Order</th>
-                                            <th>Update Status</th>
+                                            <th>Update Status Order</th>
                                             <th>Alamat Lengkap</th>
                                         </tr>
                                         </thead>

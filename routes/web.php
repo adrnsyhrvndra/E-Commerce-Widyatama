@@ -65,7 +65,7 @@ Route::middleware(['auth', 'checkRole:admin'])->group(function () {
 
       // Payment Routes
       Route::get('/paymentAdmin', [PaymentController::class, 'paymentAdmin']);
-      Route::put('/paymentAdmin/update/{order_id}', [PaymentController::class, 'paymentAdminUpdate']);
+      Route::put('/paymentAdmin/update/{payment_id}', [PaymentController::class, 'paymentAdminUpdate']);
 });
 
 // Auth Routes

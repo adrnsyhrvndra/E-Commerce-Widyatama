@@ -9,9 +9,27 @@ use App\Models\Order;
 use App\Models\Payment;
 
 class PaymentController extends Controller{
+
+    public function paymentAdmin(){
+        $payments = Payment::with(['order.user'])->get();
+        return view('payment.index', compact('payments'));
+    }
+
+    public function paymentAdminUpdate(Request $request, $payment_id){
+        try {
+            $payment = Payment::findOrFail($request->payment_id);
+            $payment->payment_status = $request->payment_status;
+            $payment->save();
+
+            return redirect('/paymentAdmin')->with('success', 'Status payment berhasil diubah');
+
+        } catch (\Exception $e) {
+            return redirect('/paymentAdmin')->with('error', 'Status payment gagal diubah. Coba lagi!');
+        }
+    }
+
     public function store(Request $request){
         try {
-
             // Update terlebih dahulu order status dari tabel order
             $orderStatus = Order::where('order_id', $request->order_id)->first();
             $orderStatus->update([
