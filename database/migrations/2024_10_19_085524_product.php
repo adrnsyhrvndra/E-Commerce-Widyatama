@@ -20,11 +20,11 @@ class Product extends Migration
 
             $table->string('product_name', 100);
             $table->text('description');
-            $table->integer('price'); 
+            $table->integer('price');
             $table->integer('stock');
             $table->binary('product_image')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
             $table->foreign('brand_id')->references('brand_id')->on('brands')->onDelete('cascade');
         });

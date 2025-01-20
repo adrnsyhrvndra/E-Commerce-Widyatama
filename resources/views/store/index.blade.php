@@ -6,105 +6,9 @@
 
     <div class="boxed_wrapper">
         <!-- main header -->
-        <header class="main-header">
-            <div class="header-lower">
-                <div class="auto-container">
-                    <div class="outer-box">
-                        <figure class="logo-box"><a href="index.html"><img width="110" src="images/LOGO_TOKO_UTAMA_COLORED.png" alt=""></a></figure>
-                        <div class="menu-area">
-                            <!--Mobile Navigation Toggler-->
-                            <div class="mobile-nav-toggler">
-                                <i class="icon-bar"></i>
-                                <i class="icon-bar"></i>
-                                <i class="icon-bar"></i>
-                            </div>
-                            <nav class="main-menu navbar-expand-md navbar-light">
-                                <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-                                    <ul class="navigation clearfix">
-                                        <li class="current">
-                                            <a href="/">All Products</a>
-                                        </li>
-                                        <li>
-                                            <a href="/addresses">Manage Addreses</a>
-                                        </li>    
-                                        <li>
-                                            
-                                        </li>    
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <ul class="menu-right-content clearfix">
-                            <li class="shop-cart">
-                                <a href="/myorders"><i class="flaticon-shopping-cart-1"></i><span>3</span></a>
-                            </li>
-                            <li class="shop-cart">
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="bg-danger" style="padding-left:18px; padding-right:18px; padding-top:2px; padding-bottom:2px; border-radius:3px; color:white;">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!--sticky Header-->
-            <div class="sticky-header">
-                <div class="auto-container">
-                    <div class="outer-box clearfix">
-                        <div class="logo-box pull-left">
-                            <figure class="logo"><a href="index.html"><img src="assets/images/small-logo.png" alt=""></a></figure>
-                        </div>
-                        <div class="menu-area pull-right">
-                            <nav class="main-menu clearfix"></nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
         <!-- shop-page-section -->
         <section class="shop-page-section shop-page-1">
             <div class="auto-container">
-                <div class="item-shorting clearfix">
-                    <div class="left-column pull-left clearfix">
-                        <div class="filter-box">
-                            <div class="dropdown">
-                                <button class="search-box-btn" type="button" id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-list-2"></i>Filter</button>
-                            </div>
-                        </div>
-                        <div class="text"><p>Showing 1–12 of 50 Results</p></div>
-                        <div class="short-box clearfix">
-                            <p>Short by</p>
-                            <div class="select-box">
-                                <select class="wide">
-                                <option data-display="9">9</option>
-                                <option value="1">5</option>
-                                <option value="2">7</option>
-                                <option value="4">15</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-column pull-right clearfix">
-                        <div class="short-box clearfix">
-                            <p>Short by</p>
-                            <div class="select-box">
-                                <select class="wide">
-                                <option data-display="Popularity">Popularity</option>
-                                <option value="1">New Collection</option>
-                                <option value="2">Top Sell</option>
-                                <option value="4">Top Ratted</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="menu-box">
-                            <a href="shop.html"><i class="flaticon-menu"></i></a>
-                            <a href="shop.html"><i class="flaticon-list"></i></a>
-                        </div>
-                    </div>
-                </div>
                 <div class="our-shop">
                     <div class="row clearfix">
                         @foreach ($products as $product)
@@ -112,7 +16,7 @@
                                 <div class="shop-block-one">
                                     <div class="inner-box">
                                         <figure class="image-box">
-                                            <img src="data:image/jpeg;base64,{{ base64_encode($product->product_image) }}" alt="">
+                                            <img src="data:image/jpeg;base64,{{ base64_encode($product->product_image) }}" alt="Product Image" class="product-img">
                                             <form action="/order/store" method="POST">
                                                 @csrf
                                                 @if ($order != null)
@@ -127,7 +31,7 @@
                                                 <input type="hidden" name="order_date" value="{{ date('Y-m-d') }}">
                                                 <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                                                 <input type="hidden" name="price" value="{{ $product->price }}">
-                
+
                                                 @if ($addresses != null)
                                                     <ul class="info-list clearfix" style="text-align: center; background-color:#474B8E; color:white; border-radius: 5px; font-size: 8px; flex: 1 1 0%; flex-direction: column; padding:7px; gap: 1rem;">
                                                         <input type="number" name="quantity" class="form-control" value="1" min="1" max="{{ $product->stock }}">
@@ -136,7 +40,7 @@
                                                         </button>
                                                     </ul>
                                                 @else
-                                                    <ul class="info-list clearfix" style="text-align: center; background-color:#474B8E; color:white; border-radius: 5px; font-size: 8px;">
+                                                    <ul class="info-list clearfix" style="text-align: center; background-color:#474B8E; color:white; border-radius: 6px; font-size: 16px;">
                                                         <li>Tambah Alamatmu terlebih dahulu untuk order</li>
                                                     </ul>
                                                 @endif
@@ -177,7 +81,6 @@
         </section>
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         @if (session('success'))
             Swal.fire({
@@ -186,7 +89,7 @@
                 text: "{{ session('success') }}"
             });
         @endif
-    
+
         @if (session('error'))
             Swal.fire({
                 icon: 'error',

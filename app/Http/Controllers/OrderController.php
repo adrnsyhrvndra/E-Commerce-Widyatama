@@ -14,9 +14,17 @@ class OrderController extends Controller{
 
     public function index(){
         $orderItem = OrderItem::whereHas('order', function ($query) {
+            $query->where('user_id', auth()->user()->user_id)->where('order_status', 'pending');;
+        })->get();
+
+        return view('store.mycart', compact('orderItem'));
+    }
+
+    public function order_history(){
+        $orderItem = OrderItem::whereHas('order', function ($query) {
             $query->where('user_id', auth()->user()->user_id);
         })->get();
-    
+
         return view('store.myorder', compact('orderItem'));
     }
 
@@ -44,15 +52,13 @@ class OrderController extends Controller{
             $user = User::with('orders')->find(auth()->user()->user_id);
             $order = new Order;
 
-            // Jika ada data order lebih dari satu sesuai auth user, maka caranya akan berbeda ya 
             if($user->orders->count() > 0 && $user->orders->first()->order_status == 'pending'){
 
-                // Update terlebih dahulu total price dari tabel order
                 $orderTotalPriceData = Order::where('order_id', $request->order_id)->first();
                 $orderTotalPriceData->update([
                     'total_price' => $orderTotalPriceData->total_price + $request->total_price * $request->quantity
                 ]);
-                
+
                 $orderItem = new OrderItem;
                 $orderItem->order_id = $request->order_id;
                 $orderItem->product_id = $request->product_id;
@@ -67,7 +73,7 @@ class OrderController extends Controller{
                 $order->total_price = $request->total_price * $request->quantity;
                 $order->order_date = $request->order_date;
                 $order->save();
-    
+
                 $orderItem = new OrderItem;
                 $orderItem->order_id = $order->order_id;
                 $orderItem->product_id = $request->product_id;
@@ -86,7 +92,6 @@ class OrderController extends Controller{
 
     public function delete($order_item_id){
         try {
-            // Update terlebih dahulu total price dari tabel order
             $orderTotalPriceData = OrderItem::where('order_item_id', $order_item_id)->first();
             $orderTotalPriceData->order->update([
                 'total_price' => $orderTotalPriceData->order->total_price - $orderTotalPriceData->price * $orderTotalPriceData->quantity

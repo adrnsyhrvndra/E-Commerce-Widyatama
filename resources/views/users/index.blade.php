@@ -27,10 +27,18 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Atur Data Users</h4>
-                                    <p class="card-title-desc">
-                                        Ayo atur data user disini untuk memudahkan penjualan anda.
-                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h4 class="card-title mb-0">Atur Data Users</h4>
+                                            <p class="card-title-desc mb-0">
+                                                Ayo atur data user disini untuk memudahkan penjualan anda.
+                                            </p>
+                                        </div>
+                                        <a href="/user/create" class="btn btn-success waves-effect waves-light w-lg">
+                                            <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle me-2"></i>
+                                            Tambah Pengguna
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
@@ -65,7 +73,7 @@
                                                         <img width="60" src="data:image/jpeg;base64,{{ base64_encode($item->profile_picture) }}" alt="User Logo" class="profile-img rounded-circle">
                                                     </td>
                                                     <td>
-                                                      @if ($item->role == 'admin')
+                                                      @if ( $item->user_id != auth()->user()->user_id)
                                                             <a href="/user/edit/{{ $item->user_id }}" class="btn btn-sm btn-success">Edit</a>
                                                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapus{{ $item->user_id }}">Hapus</button>
 
@@ -90,7 +98,7 @@
                                                                         </div>
                                                                   </div>
                                                             </div>
-                                                            </div>                                                            
+                                                            </div>
                                                       @else
                                                             <h6>Disabled</h6>
                                                       @endif
@@ -101,14 +109,6 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="col-6 text-end">
-                            <a href="/user/create" class="btn btn-success waves-effect waves-light w-lg">
-                                <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle me-2"></i>
-                                Tambah Admin
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                 text: "{{ session('success') }}"
             });
         @endif
-    
+
         @if (session('error'))
             Swal.fire({
                 icon: 'error',

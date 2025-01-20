@@ -113,42 +113,50 @@
     </style>
 
     <div class="boxed_wrapper">
-        <header class="main-header">
-            <div class="header-lower">
-                <div class="auto-container">
-                    <div class="outer-box">
-                        <figure class="logo-box"><a href="index.html"><img width="110" src="images/LOGO_TOKO_UTAMA_COLORED.png" alt=""></a></figure>
-                        <div class="menu-area">
-                            <!--Mobile Navigation Toggler-->
-                            <div class="mobile-nav-toggler">
-                                <i class="icon-bar"></i>
-                                <i class="icon-bar"></i>
-                                <i class="icon-bar"></i>
-                            </div>
-                            <nav class="main-menu navbar-expand-md navbar-light">
-                                <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-                                    <ul class="navigation clearfix">
-                                        <li>
-                                            <a href="/">All Products</a>
-                                        </li>
-                                        <li class="current">
-                                            <a href="/addresses">Manage Addreses</a>
-                                        </li>    
-                                        <li>
-                                            
-                                        </li>    
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <ul class="menu-right-content clearfix">
-                            <li class="shop-cart">
-                                <a href="/myorders"><i class="flaticon-shopping-cart-1"></i><span>3</span></a>
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="images/ONLY ICON.png" alt="Logo Icon" height="24">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="images/LOGO_TOKO_UTAMA_COLORED.png" alt="Logo" height="24">
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item bg-light-subtle border-start border-end"
+                            id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user"
+                                src="data:image/jpeg;base64,{{ base64_encode(Auth::user()->profile_picture) }}">
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ Auth::user()->full_name }}</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <!-- Profile Link -->
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="mdi mdi-account-circle font-size-16 align-middle me-1"></i> Profile
+                                </a>
                             </li>
-                            <li class="shop-cart">
-                                <form method="POST" action="{{ route('logout') }}">
+                            <li>
+                                <a class="dropdown-item" href="/addresses">
+                                    <i class="mdi mdi-map-marker font-size-16 align-middle me-1"></i> Address
+                                </a>
+                            </li>
+                            <div class="dropdown-divider"></div>
+                            <!-- Logout Button -->
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                     @csrf
-                                    <button type="submit" class="bg-danger" style="padding-left:18px; padding-right:18px; padding-top:2px; padding-bottom:2px; border-radius:3px; color:white;">Logout</button>
+                                    <button class="dropdown-item" type="submit">
+                                        <i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout
+                                    </button>
                                 </form>
                             </li>
                         </ul>
@@ -156,6 +164,7 @@
                 </div>
             </div>
         </header>
+    </div>
         <section class="shop-page-section shop-page-1">
             <div class="auto-container">
                 <div class="row">
@@ -203,8 +212,8 @@
                                                         <form action="/addresses/updateMainAddress/{{ $item->address_id }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('put')
-                                                            <button 
-                                                                type="submit" 
+                                                            <button
+                                                                type="submit"
                                                                 class="btn btn-sm btn-primary"
                                                                 {{ $hasPrimaryAddress ? 'disabled' : '' }}>
                                                                 Set Alamat Utama
@@ -214,8 +223,8 @@
                                                         <form action="/addresses/removeMainAddress/{{ $item->address_id }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('put')
-                                                            <button 
-                                                                type="submit" 
+                                                            <button
+                                                                type="submit"
                                                                 class="btn btn-sm btn-danger">
                                                                 Hapus Alamat Utama
                                                             </button>
@@ -251,126 +260,13 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <h4>Tambah Alamat</h4>
-                    </div>
-                    <div class="col-12 mt-4">
-                        <form
-                            style="
-                                display: grid;
-                                grid-template-columns: repeat(2, 1fr);
-                                column-gap: 20px;
-                                row-gap: 15px;
-                            " 
-                            action="{{'/addresses/store'}}"
-                            method="POST" 
-                            enctype="multipart/form-data"
-                        >
-                            @csrf
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->user_id }}">
-
-                            <div class="form-group">
-                                <label for="address_label">Address Label</label>
-                                <input 
-                                    type="text" 
-                                    name="address_label" 
-                                    class="form-control" 
-                                    id="address_label"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="receipt_name">Receipt Name</label>
-                                <input 
-                                    type="text" 
-                                    name="receipt_name" 
-                                    class="form-control" 
-                                    id="receipt_name"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="province">Province</label>
-                                <select name="province" id="province" class="form-control w-100">
-                                    <option value="" disabled selected>Pilih Provinsi</option>
-                                    <option value="Aceh">Aceh</option>
-                                    <option value="Bali">Bali</option>
-                                    <option value="Banten">Banten</option>
-                                    <option value="Bengkulu">Bengkulu</option>
-                                    <option value="Gorontalo">Gorontalo</option>
-                                    <option value="Jakarta">Jakarta</option>
-                                    <option value="Jambi">Jambi</option>
-                                    <option value="Jawa Barat">Jawa Barat</option>
-                                    <option value="Jawa Tengah">Jawa Tengah</option>
-                                    <option value="Jawa Timur">Jawa Timur</option>
-                                    <option value="Kalimantan Barat">Kalimantan Barat</option>
-                                    <option value="Kalimantan Selatan">Kalimantan Selatan</option>
-                                    <option value="Kalimantan Tengah">Kalimantan Tengah</option>
-                                    <option value="Kalimantan Timur">Kalimantan Timur</option>
-                                    <option value="Kalimantan Utara">Kalimantan Utara</option>
-                                    <option value="Kepulauan Riau">Kepulauan Riau</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="city_or_regency">City or Regency</label>
-                                <input 
-                                    type="text" 
-                                    name="city_or_regency" 
-                                    class="form-control" 
-                                    id="city_or_regency"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="district">District</label>
-                                <input 
-                                    type="text" 
-                                    name="district" 
-                                    class="form-control" 
-                                    id="district"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="postal_code">Postal Code</label>
-                                <input 
-                                    type="text" 
-                                    name="postal_code" 
-                                    class="form-control" 
-                                    id="postal_code"
-                                />
-                            </div>
-
-                            <div class="form-group" style="grid-column: span 2;">
-                                <label for="full_address">Full Address</label>
-                                <textarea name="full_address" cols="30" rows="5" class="form-control" id="full_address"></textarea>
-                            </div>
-
-                            <div class="form-group" style="grid-column: span 2;">
-                                <label for="address_note">Address Note</label>
-                                <textarea name="address_note" cols="30" rows="5" class="form-control" id="address_note"></textarea>
-                            </div>
-
-                            <button 
-                                type="submit" 
-                                class="btn btn-primary mt-3 py-3" 
-                                style="font-size: 17px; grid-column: span 2;"
-                            >
-                                Simpan
-                            </button>
-                        </form>
-
+                        <a href="/addresses/form"> <button type="submit" class="btn btn-sm btn-primary"> Tambah Alamat </button></a>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
@@ -387,8 +283,8 @@
                     "paginate": {
                         "first": "Pertama",
                         "last": "Terakhir",
-                        "next": "Berikutnya",
-                        "previous": "Sebelumnya"
+                        "next": ">>",
+                        "previous": "<<"
                     }
                 }
             });
@@ -403,7 +299,7 @@
                 text: "{{ session('success') }}"
             });
         @endif
-    
+
         @if (session('error'))
             Swal.fire({
                 icon: 'error',

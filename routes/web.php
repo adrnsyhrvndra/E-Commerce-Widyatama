@@ -78,6 +78,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Store User Route
 Route::get('/', [AuthController::class, 'showStorePage'])->middleware('auth');
 Route::get('/addresses', [StoreController::class, 'showAddresesPage'])->middleware('auth');
+Route::get('/addresses/form', [StoreController::class, 'formAddresesPage'])->middleware('auth');
 Route::post('/addresses/store', [StoreController::class, 'addAddress'])->middleware('auth');
 Route::get('/addresses/edit/{address_id}', [StoreController::class, 'editAddress'])->middleware('auth');
 Route::put('/addresses/update/{address_id}', [StoreController::class, 'updateAddress'])->middleware('auth');
@@ -86,7 +87,8 @@ Route::put('/addresses/removeMainAddress/{address_id}', [StoreController::class,
 Route::delete('/addresses/delete/{address_id}', [StoreController::class, 'deleteAddress'])->middleware('auth');
 Route::post('/order/store', [OrderController::class, 'store'])->middleware('auth');
 Route::delete('/order/delete/{order_item_id}', [OrderController::class, 'delete'])->middleware('auth');
-Route::get('/myorders', [OrderController::class, 'index'])->middleware('auth');
+Route::get('/mycart', [OrderController::class, 'index'])->middleware('auth');
+Route::get('/myorders', [OrderController::class, 'order_history'])->middleware('auth');
 Route::post('/payment/store', [PaymentController::class, 'store'])->middleware('auth');
 Route::get('/payment/edit/{payment_id}', [PaymentController::class, 'choosePaymentMethod'])->middleware('auth');
 Route::put('/payment/update/{payment_id}', [PaymentController::class, 'update'])->middleware('auth');

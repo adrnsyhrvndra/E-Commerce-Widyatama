@@ -27,10 +27,18 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Atur Data Produk</h4>
-                                    <p class="card-title-desc">
-                                        Ayo atur data produk disini untuk memudahkan penjualan anda.
-                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h4 class="card-title mb-0">Atur Data Produk</h4>
+                                            <p class="card-title-desc mb-0">
+                                                Ayo atur data produk disini untuk memudahkan penjualan anda.
+                                            </p>
+                                        </div>
+                                        <a href="/product/create" class="btn btn-success waves-effect waves-light w-lg">
+                                            <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle me-2"></i>
+                                            Tambah Produk
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
@@ -53,17 +61,18 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $item->categories->category_name }}</td>
                                                     <td>
-                                                        <div style="display: flex; align-items: center; justify-content: center; flex-direction: row; column-gap: 10px">
-                                                            <img width="20" src="data:image/jpeg;base64,{{ base64_encode($item->brands->brand_logo) }}" alt="Brand Logo" class="product-img">
+                                                        <div style="display: flex; align-items: center; justify-content: center; flex-direction: row; column-gap: 8px">
                                                             {{ $item->brands->brand_name }}
                                                         </div>
                                                     </td>
                                                     <td>{{ $item->product_name }}</td>
-                                                    <td>{{ $item->description }}</td>
-                                                    <td>{{ $item->price }}</td>
+                                                    <td>
+                                                        <div class="product-description">{{ strip_tags($item->description) }}</div>
+                                                    </td>
+                                                    <td>{{ "Rp " . number_format($item->price, 0, ',', '.') }}</td>
                                                     <td>{{ $item->stock }}</td>
                                                     <td>
-                                                        <img width="60" src="data:image/jpeg;base64,{{ base64_encode($item->product_image) }}" alt="Brand Logo" class="product-img">
+                                                        <img width="60" src="data:image/jpeg;base64,{{ base64_encode($item->product_image) }}" alt="Product Image" class="product-img">
                                                     </td>
                                                     <td>
                                                         <a href="/product/edit/{{ $item->product_id }}" class="btn btn-sm btn-success">Edit</a>
@@ -100,19 +109,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-end">
-                        <div class="col-6 text-end">
-                            <a href="/product/create" class="btn btn-success waves-effect waves-light w-lg">
-                                <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle me-2"></i>
-                                Tambah Data Produk
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
             @include('layouts.partials.footerAdmin')
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -124,7 +126,7 @@
                 text: "{{ session('success') }}"
             });
         @endif
-    
+
         @if (session('error'))
             Swal.fire({
                 icon: 'error',
@@ -134,4 +136,28 @@
         @endif
     </script>
 
+@endsection
+
+@section('styles')
+    <style>
+        .product-description {
+            max-width: 100px;  
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        table td, table th {
+            padding: 8px;
+            text-align: center;
+        }
+        
+        table {
+            table-layout: fixed;
+        }
+        
+        table th, table td {
+            min-width: 80px;
+        }
+    </style>
 @endsection

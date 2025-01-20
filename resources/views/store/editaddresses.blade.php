@@ -5,62 +5,17 @@
 @section('content')
 
       <div class="boxed_wrapper">
-            <header class="main-header">
-                  <div class="header-lower">
-                      <div class="auto-container">
-                          <div class="outer-box">
-                              <figure class="logo-box">
-                                    <img width="110" src="images/LOGO_TOKO_UTAMA_COLORED.png" alt="">
-                              </figure>
-                              <div class="menu-area">
-                                  <!--Mobile Navigation Toggler-->
-                                  <div class="mobile-nav-toggler">
-                                      <i class="icon-bar"></i>
-                                      <i class="icon-bar"></i>
-                                      <i class="icon-bar"></i>
-                                  </div>
-                                  <nav class="main-menu navbar-expand-md navbar-light">
-                                      <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-                                          <ul class="navigation clearfix">
-                                              <li>
-                                                  <a href="/">All Products</a>
-                                              </li>
-                                              <li class="current">
-                                                  <a href="/addresses">Manage Addreses</a>
-                                              </li>    
-                                              <li>
-                                                  
-                                              </li>    
-                                          </ul>
-                                      </div>
-                                  </nav>
-                              </div>
-                              <ul class="menu-right-content clearfix">
-                                  <li class="shop-cart">
-                                      <a href="/myorders"><i class="flaticon-shopping-cart-1"></i><span>3</span></a>
-                                  </li>
-                                  <li class="shop-cart">
-                                      <form method="POST" action="{{ route('logout') }}">
-                                          @csrf
-                                          <button type="submit" class="bg-danger" style="padding-left:18px; padding-right:18px; padding-top:2px; padding-bottom:2px; border-radius:3px; color:white;">Logout</button>
-                                      </form>
-                                  </li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>
-            </header>
             <section class="shop-page-section shop-page-1">
                   <div class="auto-container">
                         <h4>Edit Alamat</h4>
-                        <form 
-                              action="/addresses/update/{{ $address->address_id }}" 
-                              method="POST" 
-                              enctype="multipart/form-data" 
+                        <form
+                              action="/addresses/update/{{ $address->address_id }}"
+                              method="POST"
+                              enctype="multipart/form-data"
                               style="
-                                    display: grid; 
-                                    grid-template-columns: repeat(2, 1fr); 
-                                    column-gap: 20px; 
+                                    display: grid;
+                                    grid-template-columns: repeat(2, 1fr);
+                                    column-gap: 20px;
                                     row-gap: 15px;
                                     margin-top:30px;"
                         >
@@ -69,22 +24,22 @@
 
                         <div class="form-group">
                               <label for="address_label">Address Label</label>
-                              <input 
-                                    type="text" 
-                                    name="address_label" 
-                                    class="form-control" 
-                                    id="address_label" 
+                              <input
+                                    type="text"
+                                    name="address_label"
+                                    class="form-control"
+                                    id="address_label"
                                     value="{{ $address->address_label }}"
                               />
                         </div>
 
                         <div class="form-group">
                               <label for="receipt_name">Receipt Name</label>
-                              <input 
-                                    type="text" 
-                                    name="receipt_name" 
-                                    class="form-control" 
-                                    id="receipt_name" 
+                              <input
+                                    type="text"
+                                    name="receipt_name"
+                                    class="form-control"
+                                    id="receipt_name"
                                     value="{{ $address->receipt_name }}"
                               />
                         </div>
@@ -114,53 +69,53 @@
 
                         <div class="form-group">
                               <label for="city_or_regency">City or Regency</label>
-                              <input 
-                                    type="text" 
-                                    name="city_or_regency" 
-                                    class="form-control" 
-                                    id="city_or_regency" 
+                              <input
+                                    type="text"
+                                    name="city_or_regency"
+                                    class="form-control"
+                                    id="city_or_regency"
                                     value="{{ $address->city_or_regency }}"
                               />
                         </div>
 
                         <div class="form-group">
                               <label for="district">District</label>
-                              <input 
-                                    type="text" 
-                                    name="district" 
-                                    class="form-control" 
-                                    id="district" 
+                              <input
+                                    type="text"
+                                    name="district"
+                                    class="form-control"
+                                    id="district"
                                     value="{{ $address->district }}"
                               />
                         </div>
 
                         <div class="form-group">
                               <label for="postal_code">Postal Code</label>
-                              <input 
-                                    type="text" 
-                                    name="postal_code" 
-                                    class="form-control" 
-                                    id="postal_code" 
+                              <input
+                                    type="text"
+                                    name="postal_code"
+                                    class="form-control"
+                                    id="postal_code"
                                     value="{{ $address->postal_code }}"
                               />
                         </div>
 
                         <div class="form-group" style="grid-column: span 2;">
                               <label for="full_address">Full Address</label>
-                              <textarea 
-                                    name="full_address" 
-                                    class="form-control" 
-                                    id="full_address" 
+                              <textarea
+                                    name="full_address"
+                                    class="form-control"
+                                    id="full_address"
                                     rows="3"
                               >{{ $address->full_address }}</textarea>
                         </div>
 
                         <div class="form-group" style="grid-column: span 2;">
                               <label for="address_note">Address Note</label>
-                              <textarea 
-                                    name="address_note" 
-                                    class="form-control" 
-                                    id="address_note" 
+                              <textarea
+                                    name="address_note"
+                                    class="form-control"
+                                    id="address_note"
                                     rows="3"
                               >{{ $address->address_note }}</textarea>
                         </div>
@@ -183,7 +138,7 @@
                   text: "{{ session('success') }}"
                   });
             @endif
-      
+
             @if (session('error'))
                   Swal.fire({
                   icon: 'error',

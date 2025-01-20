@@ -13,12 +13,12 @@
                         <div class="row">
                               <div class="col-12">
                               <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Halaman Data Categorie</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Halaman Data Kategori</h4>
                                     <div class="page-title-right">
                                           <ol class="breadcrumb m-0">
                                           <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                          <li class="breadcrumb-item"><a href="/categorie">Categorie</a></li>
-                                          <li class="breadcrumb-item active">Tambah Categorie</li>
+                                          <li class="breadcrumb-item"><a href="/categorie">Kategori</a></li>
+                                          <li class="breadcrumb-item active">Tambah Kategori</li>
                                           </ol>
                                     </div>
                               </div>
@@ -30,16 +30,16 @@
                               <div class="col-12">
                                     <div class="card">
                                           <div class="card-header">
-                                          <h4 class="card-title">Tambah Data Categorie</h4>
+                                          <h4 class="card-title">Tambah Data Kategori</h4>
                                           <p class="card-title-desc">
-                                                Ayo tambah data categorie disini untuk memudahkan penjualan anda.
+                                                Ayo tambah data kategori disini untuk memudahkan penjualan anda.
                                           </p>
                                           </div>
                                           <div class="card-body">
                                           <div class="row">
                                                       <div class="col-6">
                                                             <div class="mb-3">
-                                                                  <label for="category_name" class="form-label">Categorie Name</label>
+                                                                  <label for="category_name" class="form-label">Category Name</label>
                                                                   <input class="form-control" type="text" name="category_name" id="category_name" required>
                                                             </div>
                                                       </div>
@@ -52,7 +52,7 @@
                                                       </a>
                                                       <button type="submit" class="btn btn-success waves-effect waves-light w-lg">
                                                       <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle"></i>
-                                                      Tambah Data Categorie
+                                                      Tambah Data Kategori
                                                       </button>
                                                 </div>
                                           </div>

@@ -40,9 +40,9 @@
                                                 <div class="col-6">
                                                       <div class="mb-3">
                                                             <label for="category_id" class="form-label">Category Name</label>
-                                                            <select name="category_id" id="category_id" class="form-select">
+                                                            <select name="category_id" id="category_id" class="form-select" required>
                                                                   @foreach ($categories as $category)
-                                                                        <option value="{{           $category->category_id }}">
+                                                                        <option value="{{ $category->category_id }}">
                                                                               {{ $category->category_name }}
                                                                         </option>
                                                                   @endforeach
@@ -52,7 +52,7 @@
                                                 <div class="col-6">
                                                       <div class="mb-3">
                                                             <label for="brand_id" class="form-label">Brand Name</label>
-                                                            <select name="brand_id" id="brand_id" class="form-select">
+                                                            <select name="brand_id" id="brand_id" class="form-select" required>
                                                                   @foreach ($brands as $brand)
                                                                         <option value="{{ $brand->brand_id }}">
                                                                               {{ $brand->brand_name }}
@@ -64,42 +64,34 @@
                                                 <div class="col-6">
                                                       <div class="mb-3">
                                                             <label for="product_name">Product Name</label>
-                                                            <input type="text" name="product_name" class="form-control" id="product_name"/>
+                                                            <input type="text" name="product_name" class="form-control" id="product_name" required>
                                                       </div>
                                                 </div>
                                                 <div class="col-6">
                                                       <div class="mb-3">
-                                                            <label for="price	">Price</label>
-                                                            <input type="number" name="price" id="price" class="form-control">
+                                                            <label for="price">Price</label>
+                                                            <input type="number" name="price" id="price" class="form-control" required>
                                                       </div>
                                                 </div>
                                                 <div class="col-6">
                                                       <div class="mb-3">
-                                                            <label for="stock	">Stock</label>
-                                                            <input type="number" name="stock" id="stock" class="form-control">
+                                                            <label for="stock">Stock</label>
+                                                            <input type="number" name="stock" id="stock" class="form-control" required>
                                                       </div>
+                                                </div>
+                                                <div class="col-6">
                                                       <div class="mb-3">
-                                                            <h6>Update Product Image</h6>
-                                                            <div id="dropzone-area" class="dropzone">
-                                                                  <div class="fallback">
-                                                                        <input name="product_image" type="file">
-                                                                  </div>
-                                                                  <div class="dz-message needsclick">
-                                                                        <div class="mb-3">
-                                                                        <i class="display-4 text-muted bx bx-cloud-upload"></i>
-                                                                        </div>
-                                                                        <h5>Ayo update image product disini.</h5>
-                                                                  </div>
-                                                            </div>
-                                                      </div> 
+                                                            <label for="product_image">Product Image</label>
+                                                            <input type="file" class="form-control" id="product_image" name="product_image">
+                                                      </div>
                                                 </div>
                                                 <div class="col-6">
                                                       <div class="mb-3">
                                                             <label for="ckeditor-classic">Description</label>
-                                                            <textarea type="text" id="ckeditor-classic" name="description"></textarea>
+                                                            <textarea type="text" id="ckeditor-classic" name="description" class="form-control"></textarea>
                                                       </div>
                                                 </div>
-                                          </div>                                    
+                                          </div>
                                           <div class="row justify-content-end mb-3 mt-2">
                                                 <div class="col-6 text-end">
                                                       <a href="/Product" class="btn btn-danger waves-effect waves-light w-lg">
@@ -123,19 +115,10 @@
             </div>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/dropzone@5.7.0/dist/min/dropzone.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
-
-            Dropzone.autoDiscover = false;
-            const dropzone = new Dropzone("#dropzone-area", {
-                  url: "/Product/upload-logo",
-                  maxFiles: 1,
-                  acceptedFiles: "image/*",
-                  addRemoveLinks: true,
-                  dictDefaultMessage: "Drop files here or click to upload.",
-            });
-
             @if (session('success'))
                   Swal.fire({
                   icon: 'success',

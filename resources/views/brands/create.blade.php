@@ -45,19 +45,13 @@
                                             </div>
                                             <div class="col-6">              
                                                 <div class="mb-3">
-                                                    <h6>Brand Logo</h6>
-                                                    <div id="dropzone-area" class="dropzone">
-                                                        <div class="fallback">
-                                                            <input name="brand_logo" type="file">
-                                                        </div>
-                                                        <div class="dz-message needsclick">
-                                                            <div class="mb-3">
-                                                                <i class="display-4 text-muted bx bx-cloud-upload"></i>
-                                                            </div>
-                                                            <h5>Ayo tambah logo brand disini.</h5>
-                                                        </div>
-                                                    </form>
-                                                </div>         
+                                                    <label for="brand_logo" class="form-label">Brand Logo</label>
+                                                    <input type="file" class="form-control" name="brand_logo" id="brand_logo" onchange="previewImage()" accept="image/*">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <h6>Preview Logo Brand</h6>
+                                                    <img id="preview" class="rounded" width="200" src="#" alt="Preview Brand Logo" style="display: none; border: 1px solid #ccc; padding: 5px;">
+                                                </div>
                                             </div>
                                         </div>                                    
                                         <div class="row justify-content-end mb-3 mt-2">
@@ -86,15 +80,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        // Preview Image Function
+        function previewImage() {
+            const input = document.getElementById('brand_logo');
+            const preview = document.getElementById('preview');
 
-        Dropzone.autoDiscover = false;
-        const dropzone = new Dropzone("#dropzone-area", {
-            url: "/brand/upload-logo",
-            maxFiles: 1,
-            acceptedFiles: "image/*",
-            addRemoveLinks: true,
-            dictDefaultMessage: "Drop files here or click to upload.",
-        });
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
         @if (session('success'))
             Swal.fire({

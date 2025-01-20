@@ -27,10 +27,18 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Atur Data Brand</h4>
-                                    <p class="card-title-desc">
-                                        Ayo atur data brand disini untuk memudahkan penjualan anda.
-                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h4 class="card-title mb-0">Atur Data Brand</h4>
+                                            <p class="card-title-desc mb-0">
+                                                Ayo atur data brand disini untuk memudahkan penjualan anda.
+                                            </p>
+                                        </div>
+                                        <a href="/brand/create" class="btn btn-success waves-effect waves-light w-lg">
+                                            <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle me-2"></i>
+                                            Tambah Brand
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
@@ -48,7 +56,7 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $item->brand_name }}</td>
                                                     <td>
-                                                        <img width="60" src="data:image/jpeg;base64,{{ base64_encode($item->brand_logo) }}" alt="Brand Logo" class="profile-img">
+                                                    <img width="60" src="data:image/jpeg;base64,{{ base64_encode($item->brand_logo) }}" alt="Brand Logo" class="profile-img">
                                                     </td>
                                                     <td>
                                                         <a href="/brand/edit/{{ $item->brand_id }}" class="btn btn-sm btn-success">Edit</a>
@@ -85,14 +93,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-end">
-                        <div class="col-6 text-end">
-                            <a href="/brand/create" class="btn btn-success waves-effect waves-light w-lg">
-                                <i class="mdi mdi-checkbox-marked-circle-plus-outline font-size-16 align-middle me-2"></i>
-                                Tambah Data Brand
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
             @include('layouts.partials.footerAdmin')
@@ -109,7 +109,7 @@
                 text: "{{ session('success') }}"
             });
         @endif
-    
+
         @if (session('error'))
             Swal.fire({
                 icon: 'error',

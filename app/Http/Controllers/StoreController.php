@@ -16,6 +16,10 @@ class StoreController extends Controller{
             return view('store.addresses', compact('user', 'addresses', 'address', 'hasPrimaryAddress'));
       }
 
+      public function formAddresesPage(){
+            return view('store.addaddreses');
+      }
+
       public function addAddress(Request $request){
             try {
                   $request->validate([
@@ -29,9 +33,9 @@ class StoreController extends Controller{
                         'full_address' => 'required',
                         'address_note' => 'required',
                   ]);
-      
+
                   $address = new Addresses;
-      
+
                   $address->user_id = $request->user_id;
                   $address->address_label = $request->address_label;
                   $address->receipt_name = $request->receipt_name;
@@ -41,9 +45,9 @@ class StoreController extends Controller{
                   $address->postal_code = $request->postal_code;
                   $address->full_address = $request->full_address;
                   $address->address_note = $request->address_note;
-      
+
                   $address->save();
-      
+
                   return redirect('/addresses')->with('success', 'Alamat berhasil ditambahkan');
             } catch (\Exception $e) {
                   return redirect('/addresses')->with('error', 'Alamat gagal ditambahkan. Coba lagi!');
@@ -67,9 +71,9 @@ class StoreController extends Controller{
                         'full_address' => 'required',
                         'address_note' => 'required',
                   ]);
-      
+
                   $address = Addresses::find($request->address_id);
-      
+
                   $address->address_label = $request->address_label;
                   $address->receipt_name = $request->receipt_name;
                   $address->province = $request->province;
@@ -78,9 +82,9 @@ class StoreController extends Controller{
                   $address->postal_code = $request->postal_code;
                   $address->full_address = $request->full_address;
                   $address->address_note = $request->address_note;
-      
+
                   $address->save();
-      
+
                   return redirect('/addresses')->with('success', 'Alamat berhasil diubah');
             } catch (\Exception $e) {
                   return redirect('/addresses')->with('error', 'Alamat gagal diubah. Coba lagi!');

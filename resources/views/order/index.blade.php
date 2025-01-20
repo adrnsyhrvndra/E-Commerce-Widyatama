@@ -48,7 +48,8 @@
                                         </thead>
                                         <tbody>
                                                 @foreach ($order as $item)
-                                                      <tr>
+                                                    @if ($item->order_status !== 'pending') <!-- Menyaring status pending -->
+                                                        <tr>
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td style="display: flex; flex-direction: row; align-items: center; justify-content: center; column-gap: 10px;">
                                                                   <img width="34" src="data:image/jpeg;base64,{{ base64_encode($item->user->profile_picture) }}" alt="Brand Logo" class="profile-img rounded-circle">
@@ -74,30 +75,16 @@
                                                             </td>
                                                             <td>Rp{{ number_format($item->total_price, 2) }}</td>
                                                             <td>
-                                                                  @if ($item->order_status === 'pending')
-
-                                                                        <button type="button" class="btn btn-danger waves-effect waves-light w-lg">Pending</button>
-                                                                        
-                                                                  @elseif ($item->order_status === 'unpaid')
-                                                                        
-                                                                        <button type="button" class="btn btn-danger waves-effect waves-light w-lg">Unpaid</button>
-
+                                                                  @if ($item->order_status === 'unpaid')
+                                                                        <button type="button" class="btn btn-danger waves-effect waves-light w-lg">Belum Bayar</button>
                                                                   @elseif ($item->order_status === 'packaged')
-                                                                        
-                                                                        <button type="button" class="btn btn-primary waves-effect waves-light w-lg">Packaged</button>
-
+                                                                        <button type="button" class="btn btn-primary waves-effect waves-light w-lg">Dikemas</button>
                                                                   @elseif ($item->order_status === 'shipped')
-                                                                        
-                                                                        <button type="button" class="btn btn-success waves-effect waves-light w-lg">Shipped</button>
-
+                                                                        <button type="button" class="btn btn-success waves-effect waves-light w-lg">Dikirim</button>
                                                                   @elseif ($item->order_status === 'completed')
-                                                                        
-                                                                        <button type="button" class="btn btn-success waves-effect waves-light w-lg">Completed</button>
-
+                                                                        <button type="button" class="btn btn-success waves-effect waves-light w-lg">Selesai</button>
                                                                   @else
-
-                                                                        <button type="button" class="btn btn-success waves-effect waves-light w-lg">Cancelled</button>
-                                                                        
+                                                                        <button type="button" class="btn btn-danger waves-effect waves-light w-lg">Dibatalkan</button>
                                                                   @endif
                                                             </td>
                                                             <td>
@@ -106,23 +93,23 @@
                                                                         @method('put')
                                                                         <div class="col-8">
                                                                               <select class="form-select" name="order_status">
-                                                                                    <option value="pending" {{ $item->order_status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                                                                    <option value="unpaid" {{ $item->order_status === 'unpaid' ? 'selected' : '' }}>Unpaid</option>
-                                                                                    <option value="packaged" {{ $item->order_status === 'packaged' ? 'selected' : '' }}>Packaged</option>
-                                                                                    <option value="shipped" {{ $item->order_status === 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                                                                    <option value="completed" {{ $item->order_status === 'completed' ? 'selected' : '' }}>Completed</option>
-                                                                                    <option value="cancelled" {{ $item->order_status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                                                                    <option value="unpaid" {{ $item->order_status === 'unpaid' ? 'selected' : '' }}>Belum Bayar</option>
+                                                                                    <option value="packaged" {{ $item->order_status === 'packaged' ? 'selected' : '' }}>Dikemas</option>
+                                                                                    <option value="shipped" {{ $item->order_status === 'shipped' ? 'selected' : '' }}>Dikirim</option>
+                                                                                    <option value="completed" {{ $item->order_status === 'completed' ? 'selected' : '' }}>Selesai</option>
+                                                                                    <option value="cancelled" {{ $item->order_status === 'cancelled' ? 'selected' : '' }}>Dibatalkan</option>
                                                                               </select>
                                                                         </div>
                                                                         <div class="col-auto">
                                                                               <button type="submit" class="btn btn-primary">Update Status Order</button>
                                                                         </div>
-                                                                  </form>                                                                  
+                                                                  </form>
                                                             </td>
                                                             <td>
                                                                   {{ $item->address->full_address }}
                                                             </td>
-                                                      </tr>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                         </tbody>
                                     </table>
@@ -146,7 +133,7 @@
                 text: "{{ session('success') }}"
             });
         @endif
-    
+
         @if (session('error'))
             Swal.fire({
                 icon: 'error',
