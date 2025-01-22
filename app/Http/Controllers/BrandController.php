@@ -96,7 +96,7 @@ class BrandController extends Controller {
     public function update(Request $request, $brand_id){
         try {
             $request->validate([
-                'brand_name' => 'required|string|max:255|min:3|unique:brands,brand_name,' . $brand_id,
+                'brand_name' => 'required|string|max:255|min:3',
                 'brand_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             ]);
 

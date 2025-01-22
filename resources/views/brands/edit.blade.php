@@ -26,7 +26,7 @@
                 </div>
                 <form action="/brand/update/{{ $brand->brand_id }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('put')
+                    @method('PUT')
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
