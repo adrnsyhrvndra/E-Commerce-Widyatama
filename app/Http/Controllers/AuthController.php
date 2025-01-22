@@ -160,14 +160,21 @@ class AuthController extends Controller {
         $jumlahOrderCompleted = DB::table('orders')->where('order_status', 'completed')->count();
     
         $jumlahUser = User::count();
+        $jumlahBrand = Brand::count();
+        $jumlahCategorie = Categorie::count();
+        $jumlahProduk = Product::count();
         $totalPendapatan = DB::table('orders')->where('order_status', 'completed')->sum('total_price');
         $jumlahOrderPending = DB::table('orders')->where('order_status', 'pending')->count();
+        $jumlahOrderUnpaid = DB::table('orders')->where('order_status', 'unpaid')->count();
+        $jumlahOrderPaid = DB::table('payments')->where('payment_status', 'paid')->count();
+        $jumlahOrderCanceled = DB::table('payments')->where('payment_status', 'cancelled')->count();
         $produkTerjual = DB::table('order_items')->sum('quantity');
     
         return view('dashboard.index', compact(
             'months', 'salesData',
             'statusLabels', 'statusCountsData',
-            'jumlahUser', 'totalPendapatan', 'jumlahOrderPending', 'produkTerjual', 'jumlahOrderCompleted'
+            'jumlahUser', 'totalPendapatan', 'jumlahOrderPending', 'produkTerjual', 'jumlahOrderCompleted','jumlahOrderUnpaid',
+            'jumlahOrderPaid', 'jumlahOrderCanceled', 'jumlahBrand', 'jumlahCategorie', 'jumlahProduk'
         ));
     }       
 
