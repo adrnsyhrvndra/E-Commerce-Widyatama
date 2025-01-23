@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="col-6">
                                             <h6>Old Product Image</h6>
-                                            <img class="rounded me-2 w-100" alt="Old Image" src="{{ asset('storage/product-images/'.$product->product_image) }}" />
+                                            <img class="rounded me-2" width="300" alt="Old Image" src="data:image/jpeg;base64,{{ base64_encode($product->product_image) }}" />
                                         </div>
                                     </div>
                                     <div class="row justify-content-end mb-3 mt-2">
